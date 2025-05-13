@@ -42,5 +42,5 @@ services:
     volumes:
       - ${nfs_mnt}${container_name}:${app_work_dir}
     ports:
-      - ${suwayomi_ports}
+      - ${suwayomi_port}
     restart: ${restart}
