@@ -15,5 +15,3 @@ services:
       - ${nginx_port_443}
     restart: ${restart}
 volumes:
-  data:
-  letsencrypt:
