@@ -1,0 +1,16 @@
+---
+services:
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager@sha256:e5eecad9bf040f1e7ddc9db6bbc812d690503aa119005e3aa0c24803746b49ea
+    pull_policy: ${pull_policy}
+    container_name: ${container_name}
+    environment:    
+      - TZ=${timezone}
+    volumes:
+      - data:${app_work_dir}
+      - letsencrypt:${app_letsencrypt_dir}
+    ports:
+      - ${nginx_port_80}
+      - ${nginx_port_81}
+      - ${nginx_port_443}
+    restart: ${restart}
