@@ -1,5 +1,0 @@
-include:
-  - path: docker-compose.real.yml
-    env_file:
-       - ../global-interp.env
-       - local-interp.env
