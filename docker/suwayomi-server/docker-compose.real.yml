@@ -40,7 +40,7 @@ services:
       #- FLARESOLVERR_SESSION_NAME	suwayomi	The name of the session that Suwayomi will use with FlareSolverr
       #- FLARESOLVERR_SESSION_TTL	15	The time to live for the FlareSolverr session
     volumes:
-      - ${nfs_mnt}${container_name}:${app_work_dir}
+      - ${sftp_mnt}${container_name}:${app_work_dir}
     ports:
       - ${suwayomi_port}
     restart: ${restart}
