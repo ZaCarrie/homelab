@@ -3,4 +3,4 @@ include:
     env_file:
        - ../global-interp.env
        - local-interp.env
-       - /data/sftp/secrets/environment/freshrss.env
+       # load in gui this env file /data/sftp/secrets/environment/freshrss.env
