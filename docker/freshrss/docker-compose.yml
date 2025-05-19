@@ -3,4 +3,9 @@ include:
     env_file:
        - ../global-interp.env
        - local-interp.env
-       # - ~/secrets/environment/freshrss.env #to pull from local host
+      # in gui upload enviroment vars for secret interp
+      # file ~/secrets/environment/freshrss.env
+      # BASE_URL=
+      # ADMIN_EMAIL=
+      # ADMIN_PASSWORD=
+      # ADMIN_API_PASSWORD=
