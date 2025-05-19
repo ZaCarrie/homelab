@@ -4,7 +4,7 @@ include:
        - ../global-interp.env
        - local-interp.env
       # in gui set relative path to "/"
-       - /data/sftp/secrets/environment/freshrss.env
+       - ../../../secrets/environment/freshrss.env
       # BASE_URL=
       # ADMIN_EMAIL=
       # ADMIN_PASSWORD=
