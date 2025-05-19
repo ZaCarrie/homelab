@@ -8,8 +8,7 @@ services:
       TZ: ${timezone}
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
-    env_file:
-      - path: ~/secrets/environment/freshrss.env
+    env_file: ~/secrets/environment/freshrss.env
       # This is what is in the env file with secrets replaced  
       #FRESHRSS_INSTALL: |-
       #  --api-enabled
