@@ -8,22 +8,21 @@ services:
       TZ: ${timezone}
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
-      #env_file:
-      #  - "/env_file/freshrss.env"
-      FRESHRSS_INSTALL: |-
-        --api-enabled
-        --base-url ${BASE_URL}
-        --default-user admin
-        --language en
-      FRESHRSS_USER: |-
-        --api-password ${ADMIN_API_PASSWORD}
-        --email ${ADMIN_EMAIL}
-        --language en
-        --password ${ADMIN_PASSWORD}
-        --user admin
+      env_file:
+        - "/data/sftp_secrets/environment/freshrss/freshrss.env"
+      #FRESHRSS_INSTALL: |-
+      #  --api-enabled
+      #  --base-url ${BASE_URL}
+      #  --default-user admin
+      #  --language en
+      #FRESHRSS_USER: |-
+      #  --api-password ${ADMIN_API_PASSWORD}
+      #  --email ${ADMIN_EMAIL}
+      #  --language en
+      #  --password ${ADMIN_PASSWORD}
+      #  --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
-      - /data/sftp_secrets/environment/freshrss:/env_file # brings in secrets into env file into container directory
     ports:
       - ${freshrss_port}
     restart: ${restart}
