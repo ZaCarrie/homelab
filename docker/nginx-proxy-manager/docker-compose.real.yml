@@ -9,6 +9,7 @@ networks:
           gateway: 172.18.0.1
 
 volumes:
+  data:
   letsencrypt:
 
 #secrets:
@@ -29,7 +30,7 @@ services:
     environment:    
       - TZ=${timezone}
     volumes:
-      - ${sftp_mnt}${container_name}/data:/data
+      - data:/data
       - letsencrypt:/etc/letsencrypt
 
 
