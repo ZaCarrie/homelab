@@ -22,7 +22,7 @@ services:
     restart: ${restart}
     networks:
       nginx_network:
-        ipv4_address: 172.18.0.2
+        ipv4_address: ${nginx_ipv4}
     ports:
       - ${nginx_port_80}
       - ${nginx_port_81}

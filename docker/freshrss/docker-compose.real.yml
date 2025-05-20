@@ -1,9 +1,32 @@
 ---
+networks:
+  nginx_network:
+    name: nginx_network
+    external: true
+
+#volumes:
+
+secrets:
+  base-url:
+    file: /data/sftp/secrets/freshrss/base_url.txt
+  admin-email:
+    file: /data/sftp/secrets/freshrss/admin_email.txt
+  admin-password:
+    file: /data/sftp/secrets/freshrss/admin_password.txt
+  admin-api-password:
+    file: /data/sftp/secrets/freshrss/admin_api_password.txt
+
 services:
   freshrss:
     image: freshrss/freshrss@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
     pull_policy: ${pull_policy}
     container_name: ${container_name}
+    restart: ${restart}
+    networks:
+      nginx_network:
+        ipv4_address: ${freshrss_ipv4}
+    ports:
+      - ${freshrss_port}
     # pulling secrets into container
     secrets:
       - base-url
@@ -32,17 +55,4 @@ services:
         --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
-    ports:
-      - ${freshrss_port}
-    restart: ${restart}
-# declare where secret files are on host    
-secrets:
-  base-url:
-    file: /data/sftp/secrets/freshrss/base_url.txt
-  admin-email:
-    file: /data/sftp/secrets/freshrss/admin_email.txt
-  admin-password:
-    file: /data/sftp/secrets/freshrss/admin_password.txt
-  admin-api-password:
-    file: /data/sftp/secrets/freshrss/admin_api_password.txt
 
