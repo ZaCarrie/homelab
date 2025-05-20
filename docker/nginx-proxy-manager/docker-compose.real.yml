@@ -1,19 +1,34 @@
 ---
+networks:
+  nginx_network:
+    name: nginx_network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.1
+
+#volumes:
+
+#secrets:
+
 services:
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager@sha256:e5eecad9bf040f1e7ddc9db6bbc812d690503aa119005e3aa0c24803746b49ea
     pull_policy: ${pull_policy}
     container_name: ${container_name}
-    environment:    
-      - TZ=${timezone}
-    volumes:
-      - data:${app_work_dir}
-      - letsencrypt:${app_letsencrypt_dir}
+    restart: ${restart}
+    networks:
+      nginx_network:
+        ipv4_address: 172.18.0.2
     ports:
       - ${nginx_port_80}
       - ${nginx_port_81}
       - ${nginx_port_443}
-    restart: ${restart}
-volumes:
-  data:
-  letsencrypt:
+    environment:    
+      - TZ=${timezone}
+    volumes:
+      - ${sftp_mnt}${container_name}/data:/data
+      - ${sftp_mnt}${container_name}/letsencrypt:/etc/letsencrypt
+
+
