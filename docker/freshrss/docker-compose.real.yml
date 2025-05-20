@@ -4,12 +4,21 @@ services:
     image: freshrss/freshrss@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
     pull_policy: ${pull_policy}
     container_name: ${container_name}
+    secrets:
+      - base-url
+      - admin-email
+      - admin-password
+      - admin-api-password
     #env_file:
     #  - "/env_file/.env.vars"
     environment:    
       TZ: ${timezone}
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
+      BASE_URL_FILE: /run/secrets/base-url
+      ADMIN_EMAIL_FILE: /run/secrets/admin-email
+      ADMIN_PASSWORD_FILE: /run/secrets/admin-password
+      ADMIN_API_PASSWORD_FILE: /run/secrets/admin-api-password
       FRESHRSS_INSTALL: |-
         --api-enabled
         --base-url ${BASE_URL}
@@ -27,4 +36,13 @@ services:
     ports:
       - ${freshrss_port}
     restart: ${restart}
+secrets:
+  base-url:
+    file: /data/sftp/secrets/freshrss/base_url.txt
+  admin-email:
+    file: /data/sftp/secrets/freshrss/admin_email.txt
+  admin-password:
+    file: /data/sftp/secrets/freshrss/admin_password.txt
+  admin-api-password:
+    file: /data/sftp/secrets/freshrss/admin_api_password.txt
 
