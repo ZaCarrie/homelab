@@ -71,6 +71,15 @@ reboot now
 ```
 ls -la /data/sftp
 ```
+resize sda1 to size of disk https://askubuntu.com/questions/958114/resize-ubuntu-dev-sda1-partition-in-virtualbox-vmdk-when-dev-sda-is-already-la
+you have to first resize the partition with the following steps:
+sudo parted /dev/sda to enter the prompt "(parted)" as the superuser
+resizepart 1 to resize the partition 1
+-0 resizes it to the end of the disk. - indicates that it should count from the end of the disk, not the start. This makes -0 the last sector of the disk - which is suitable when you want to make it as big as possible. Step 4:
+quit to exit parted
+The file system meta information needs to indicate the size of disk, and resize2fs updates this. Thus, after expanding, run resize2fs /dev/sda1.
+
+
 install docker https://docs.docker.com/engine/install/debian/
 
 install portainer buisness edition https://docs.portainer.io/start/install/server/docker/linux
