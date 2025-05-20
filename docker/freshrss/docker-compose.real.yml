@@ -9,7 +9,7 @@ services:
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
       env_file:
-        - "/data/sftp_secrets/environment/freshrss/freshrss.env"
+        path: /data/sftp/secrets/freshrss/freshrss.env
       #FRESHRSS_INSTALL: |-
       #  --api-enabled
       #  --base-url ${BASE_URL}
