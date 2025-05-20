@@ -9,18 +9,18 @@ services:
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
       env_file:
-        path: /env_file/freshrss.env
-      #FRESHRSS_INSTALL: |-
-      #  --api-enabled
-      #  --base-url ${BASE_URL}
-      #  --default-user admin
-      #  --language en
-      #FRESHRSS_USER: |-
-      #  --api-password ${ADMIN_API_PASSWORD}
-      #  --email ${ADMIN_EMAIL}
-      #  --language en
-      #  --password ${ADMIN_PASSWORD}
-      #  --user admin
+        path: /env_file/freshrss_env.env
+      FRESHRSS_INSTALL: |-
+        --api-enabled
+        --base-url ${BASE_URL}
+        --default-user admin
+        --language en
+      FRESHRSS_USER: |-
+        --api-password ${ADMIN_API_PASSWORD}
+        --email ${ADMIN_EMAIL}
+        --language en
+        --password ${ADMIN_PASSWORD}
+        --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
       - /data/sftp/secrets/freshrss/:/env_file
