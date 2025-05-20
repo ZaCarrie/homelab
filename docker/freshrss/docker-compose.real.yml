@@ -23,7 +23,7 @@ services:
       #  --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
-      - /data/sftp/secrets/environment/freshrss:/env_file # brings in secrets into env file into container directory
+      - /data/sftp_secrets/environment/freshrss:/env_file # brings in secrets into env file into container directory
     ports:
       - ${freshrss_port}
     restart: ${restart}
