@@ -8,7 +8,8 @@ networks:
         - subnet: 172.18.0.0/16
           gateway: 172.18.0.1
 
-#volumes:
+volumes:
+  letsencrypt:
 
 #secrets:
 
@@ -29,6 +30,6 @@ services:
       - TZ=${timezone}
     volumes:
       - ${sftp_mnt}${container_name}/data:/data
-      - ${sftp_mnt}${container_name}/letsencrypt:/etc/letsencrypt
+      - letsencrypt:/etc/letsencrypt
 
 
