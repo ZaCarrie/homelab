@@ -4,17 +4,17 @@ services:
     image: freshrss/freshrss@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
     pull_policy: ${pull_policy}
     container_name: ${container_name}
+    # pulling secrets into container
     secrets:
       - base-url
       - admin-email
       - admin-password
       - admin-api-password
-    #env_file:
-    #  - "/env_file/.env.vars"
     environment:    
       TZ: ${timezone}
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
+      # telling the enviroments "name"_FILE where to pull the secret text from inside of container
       BASE_URL_FILE: /run/secrets/base-url
       ADMIN_EMAIL_FILE: /run/secrets/admin-email
       ADMIN_PASSWORD_FILE: /run/secrets/admin-password
@@ -32,10 +32,10 @@ services:
         --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
-    #  - /data/sftp/secrets/freshrss/:/env_file
     ports:
       - ${freshrss_port}
     restart: ${restart}
+# declare where secret files are on host    
 secrets:
   base-url:
     file: /data/sftp/secrets/freshrss/base_url.txt
