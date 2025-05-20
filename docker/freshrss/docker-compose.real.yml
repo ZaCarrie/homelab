@@ -9,7 +9,7 @@ services:
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
       env_file:
-        path: /data/sftp/secrets/freshrss/freshrss.env
+        - "/env_file/freshrss.env"
       #FRESHRSS_INSTALL: |-
       #  --api-enabled
       #  --base-url ${BASE_URL}
@@ -23,6 +23,7 @@ services:
       #  --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
+      - /data/sftp/secrets/freshrss/:/env_file
     ports:
       - ${freshrss_port}
     restart: ${restart}
