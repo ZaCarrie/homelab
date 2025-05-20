@@ -9,7 +9,7 @@ services:
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
       env_file:
-        path: /env_file/freshrss_env.env
+        path: /env_file/.env.vars
       FRESHRSS_INSTALL: |-
         --api-enabled
         --base-url ${BASE_URL}
