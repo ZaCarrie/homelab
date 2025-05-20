@@ -3,8 +3,8 @@ include:
     env_file:
        - ../global-interp.env
        - ./local-interp.env
-      # in gui set relative path to "/"
-      # - "/data/sftp_secrets/environment/freshrss.env"
+      # in gui set relative path to "/data/freshrss"
+       - ../data/sftp/secrets/freshrss/.env.vars
       # BASE_URL=
       # ADMIN_EMAIL=
       # ADMIN_PASSWORD=

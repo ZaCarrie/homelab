@@ -4,8 +4,8 @@ services:
     image: freshrss/freshrss@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
     pull_policy: ${pull_policy}
     container_name: ${container_name}
-    env_file:
-      - "/env_file/.env.vars"
+    #env_file:
+    #  - "/env_file/.env.vars"
     environment:    
       TZ: ${timezone}
       CRON_MIN: '2,32'
@@ -23,7 +23,7 @@ services:
         --user admin
     volumes:
       - ${sftp_mnt}${container_name}:${app_work_dir}
-      - /data/sftp/secrets/freshrss/:/env_file
+    #  - /data/sftp/secrets/freshrss/:/env_file
     ports:
       - ${freshrss_port}
     restart: ${restart}
