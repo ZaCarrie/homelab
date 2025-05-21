@@ -8,13 +8,13 @@ networks:
 
 secrets:
   base-url:
-    file: /data/sftp/secrets/freshrss/base_url.txt
+    file: ${share_mnt}secrets/freshrss/base_url.txt
   admin-email:
-    file: /data/sftp/secrets/freshrss/admin_email.txt
+    file: ${share_mnt}secrets/freshrss/admin_email.txt
   admin-password:
-    file: /data/sftp/secrets/freshrss/admin_password.txt
+    file: ${share_mnt}secrets/freshrss/admin_password.txt
   admin-api-password:
-    file: /data/sftp/secrets/freshrss/admin_api_password.txt
+    file: ${share_mnt}secrets/freshrss/admin_api_password.txt
 
 services:
   freshrss:
