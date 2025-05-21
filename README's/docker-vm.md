@@ -26,50 +26,26 @@ reboot now
 setup unattended upgrades https://linuxblog.io/how-to-enable-unattended-upgrades-on-ubuntu-debian/
 config enable security and updates
 ```
-apt install sshfs -y
+apt install nfs-common -y
 ```
 ```
 cd /
 ```
 ```
-mkdir /data
-```
-```
-mkdir /data/sftp
+mkdir -p /data/nfs
 ```
 ```
 chmod 777 -R /data
 ```
-
-give root user ssh private key
-```
-cd ~/.ssh
-```
-nano config
-```
-Host *
-    IdentityFile ~/.ssh/truenas
-```
-nano truenas
-```
-ssh private key here
-```
-```
-chmod 600 config && chmod 600 truenas
-```
-ssh root@truenas.local
-yes to keys
-exit
-
 nano /etc/fstab
 ```
-root@truenas.local:/mnt/drivepool/networkshare/docker /data/sftp fuse.sshfs _netdev,allow_other,reconnect 0 0
+10.10.10.10:/mnt/WDRed4x4TiB/NetworkShare/docker    /data/nfs   nfs    defaults 0 0
 ```
 ```
 reboot now
 ```
 ```
-ls -la /data/sftp
+ls -la /data/nfs
 ```
 resize sda1 to size of disk https://askubuntu.com/questions/958114/resize-ubuntu-dev-sda1-partition-in-virtualbox-vmdk-when-dev-sda-is-already-la
 you have to first resize the partition with the following steps:
@@ -81,8 +57,4 @@ The file system meta information needs to indicate the size of disk, and resize2
 
 
 install docker https://docs.docker.com/engine/install/debian/
-
-install portainer buisness edition https://docs.portainer.io/start/install/server/docker/linux
-
-https://docker-vm:9443/ and make account
 
