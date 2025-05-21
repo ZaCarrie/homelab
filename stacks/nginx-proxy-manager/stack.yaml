@@ -30,7 +30,7 @@ services:
     environment:    
       - TZ=${timezone}
     volumes:
-      - data:/data
-      - letsencrypt:/etc/letsencrypt
+      - ${share_mnt}${container_name}/data:/data
+      - ${share_mnt}${container_name}/letsencrypt:/etc/letsencrypt
 
 

@@ -54,5 +54,5 @@ services:
         --password ${ADMIN_PASSWORD}
         --user admin
     volumes:
-      - ${sftp_mnt}${container_name}:/var/www/FreshRSS/data
+      - ${share_mnt}${container_name}:/var/www/FreshRSS/data
 
