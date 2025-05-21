@@ -39,7 +39,7 @@ chmod 777 -R /data
 ```
 nano /etc/fstab
 ```
-10.10.10.10:/mnt/WDRed4x4TiB/NetworkShare/docker    /data/nfs   nfs    defaults 0 0
+nfs-share-ip:/path-to-docker-folder-on-share    /data/nfs   nfs    defaults 0 0
 ```
 ```
 reboot now
