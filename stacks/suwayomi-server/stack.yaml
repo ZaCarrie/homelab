@@ -1,9 +1,24 @@
 ---
+networks:
+  nginx_network:
+    name: nginx_network
+    external: true
+
+#volumes:
+
+#secrets:
+
 services:
   suwayomi-server:
     image: ghcr.io/suwayomi/suwayomi-server@sha256:17cf353fe8b70a2b52f7982a58bea5e11b96a32c78c9089c55a3d795b1a17a13
     pull_policy: ${pull_policy}
     container_name: ${container_name}
+    restart: ${restart}
+    networks:
+      nginx_network:
+        ipv4_address: ${suwayomi_ipv4}
+    ports:
+      - ${suwayomi_port}
     environment:    
       - TZ=${timezone}
       - BIND_IP=0.0.0.0	#The interface to listen on, inside the container. You almost never want to change this.
@@ -41,6 +56,3 @@ services:
       #- FLARESOLVERR_SESSION_TTL	15	The time to live for the FlareSolverr session
     volumes:
       - ${share_mnt}${container_name}:/home/suwayomi/.local/share/Tachidesk
-    ports:
-      - ${suwayomi_port}
-    restart: ${restart}
