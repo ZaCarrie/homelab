@@ -1,5 +1,5 @@
 [[server]]
-name = "server-wlsfk"
+name = "docker-lxc"
 [server.config]
 address = "https://periphery:8120"
 enabled = true
@@ -9,7 +9,7 @@ enabled = true
 [[stack]]
 name = "freshrss"
 [stack.config]
-server = "server-wlsfk"
+server = "docker-lxc"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/freshrss"
@@ -19,7 +19,7 @@ run_directory = "stacks/freshrss"
 [[stack]]
 name = "nginx-proxy-manager"
 [stack.config]
-server = "server-wlsfk"
+server = "docker-lxc"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/nginx-proxy-manager"
 
@@ -28,7 +28,7 @@ run_directory = "stacks/nginx-proxy-manager"
 [[stack]]
 name = "suwayomi-server"
 [stack.config]
-server = "server-wlsfk"
+server = "docker-lxc"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/suwayomi-server"
 
@@ -38,7 +38,7 @@ run_directory = "stacks/suwayomi-server"
 name = "local"
 [builder.config]
 type = "Server"
-params.server_id = "server-wlsfk"
+params.server_id = "docker-lxc"
 
 ##
 
