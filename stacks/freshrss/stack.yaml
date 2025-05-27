@@ -6,15 +6,7 @@ networks:
 
 #volumes:
 
-secrets:
-  base-url:
-    file: ${share_mnt}secrets/freshrss/base_url.txt
-  admin-email:
-    file: ${share_mnt}secrets/freshrss/admin_email.txt
-  admin-password:
-    file: ${share_mnt}secrets/freshrss/admin_password.txt
-  admin-api-password:
-    file: ${share_mnt}secrets/freshrss/admin_api_password.txt
+#secrets:
 
 services:
   freshrss:
@@ -27,21 +19,15 @@ services:
         ipv4_address: ${freshrss_ipv4}
     ports:
       - ${freshrss_port}
-    # pulling secrets into container
-    secrets:
-      - base-url
-      - admin-email
-      - admin-password
-      - admin-api-password
     environment:    
       TZ: ${timezone}
       CRON_MIN: '2,32'
       FRESHRSS_ENV: development
       # telling the enviroments "name"_FILE where to pull the secret text from inside of container
-      BASE_URL_FILE: /run/secrets/base-url
-      ADMIN_EMAIL_FILE: /run/secrets/admin-email
-      ADMIN_PASSWORD_FILE: /run/secrets/admin-password
-      ADMIN_API_PASSWORD_FILE: /run/secrets/admin-api-password
+      BASE_URL: [[FRESHRSS_BASE_URL]]
+      ADMIN_EMAIL: [[FRESHRSS_ADMIN_EMAIL]]
+      ADMIN_PASSWORD: [[FRESHRSS_ADMIN_PASSWORD]]
+      ADMIN_API_PASSWORD: [[FRESHRSS_ADMIN_API_PASSWORD]]
       # uncommit for first install
       #FRESHRSS_INSTALL: |-
       #  --api-enabled
