@@ -49,11 +49,3 @@ repo = "ZaCarrie/homelab"
 git_account = "github.wish887@slmail.me"
 resource_path = ["komodo.toml"]
 managed = true
-include_variables = true
-
-##
-
-[[variable]]
-name = "TEST"
-value = "test"
-is_secret = true
