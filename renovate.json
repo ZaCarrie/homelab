@@ -7,7 +7,15 @@
     ":configMigration",
     ":pinDevDependencies"
   ],
-  "docker": {
-    "managerFilePatterns": ["*\\.yaml$/"]
+  "packageRules": [
+      {
+        "matchCategories": [
+          "docker"
+        ],
+        "managerFilePatterns": [
+          "*\\.yaml$/"
+        ]
+      }
+    ]
   }
 }
