@@ -20,14 +20,14 @@ services:
     ports:
       - ${freshrss_port}
     environment:    
-      - TZ = ${timezone}
-      - CRON_MIN = 2,32
-      - FRESHRSS_ENV = development
+      TZ: ${timezone}
+      CRON_MIN: '2,32'
+      FRESHRSS_ENV: development
       # telling the enviroments "name"_FILE where to pull the secret text from inside of container
-      - BASE_URL = [[FRESHRSS_BASE_URL]]
-      - ADMIN_EMAIL = [[FRESHRSS_ADMIN_EMAIL]]
-      - ADMIN_PASSWORD = [[FRESHRSS_ADMIN_PASSWORD]]
-      - ADMIN_API_PASSWORD = [[FRESHRSS_ADMIN_API_PASSWORD]]
+      BASE_URL: [[FRESHRSS_BASE_URL]]
+      ADMIN_EMAIL: [[FRESHRSS_ADMIN_EMAIL]]
+      ADMIN_PASSWORD: [[FRESHRSS_ADMIN_PASSWORD]]
+      ADMIN_API_PASSWORD: [[FRESHRSS_ADMIN_API_PASSWORD]]
       FRESHRSS_INSTALL: |-
         --api-enabled
         --base-url ${BASE_URL}
