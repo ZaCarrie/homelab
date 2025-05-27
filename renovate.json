@@ -8,6 +8,6 @@
     ":pinDevDependencies"
   ],
   "docker": {
-    "fileMatch": ["\\.yaml$"]
+    "managerFilePatterns": ["\\.yaml$"]
   }
 }
