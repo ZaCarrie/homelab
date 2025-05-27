@@ -28,18 +28,17 @@ services:
       - ADMIN_EMAIL=[[FRESHRSS_ADMIN_EMAIL]]
       - ADMIN_PASSWORD=[[FRESHRSS_ADMIN_PASSWORD]]
       - ADMIN_API_PASSWORD=[[FRESHRSS_ADMIN_API_PASSWORD]]
-      # uncommit for first install
-      #FRESHRSS_INSTALL: |-
-      #  --api-enabled
-      #  --base-url ${BASE_URL}
-      #  --default-user admin
-      #  --language en
-      #FRESHRSS_USER: |-
-      #  --api-password ${ADMIN_API_PASSWORD}
-      #  --email ${ADMIN_EMAIL}
-      #  --language en
-      #  --password ${ADMIN_PASSWORD}
-      #  --user admin
+      FRESHRSS_INSTALL: |-
+        --api-enabled
+        --base-url ${BASE_URL}
+        --default-user admin
+        --language en
+      FRESHRSS_USER: |-
+        --api-password ${ADMIN_API_PASSWORD}
+        --email ${ADMIN_EMAIL}
+        --language en
+        --password ${ADMIN_PASSWORD}
+        --user admin
     volumes:
       - ${share_mnt}${container_name}:/var/www/FreshRSS/data
 
