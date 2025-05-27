@@ -6,5 +6,8 @@
     "helpers:pinGitHubActionDigests",
     ":configMigration",
     ":pinDevDependencies"
-  ]
+  ],
+  "docker": {
+    "fileMatch": ["\\.yaml$"]
+  }
 }
