@@ -8,6 +8,6 @@
     ":pinDevDependencies"
   ],
   "docker-compose": {
-    "managerFilePatterns": ["*\.ya?ml$/"]
+    "managerFilePatterns": ["*\\.ya?ml$/"]
   }
 }
