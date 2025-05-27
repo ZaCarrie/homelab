@@ -8,14 +8,13 @@
     ":pinDevDependencies"
   ],
   "packageRules": [
-      {
-        "matchCategories": [
-          "docker"
-        ],
-        "managerFilePatterns": [
-          "*\\.yaml$/"
-        ]
-      }
-    ]
-  }
+    {
+      "matchCategories": [
+        "docker"
+      ],
+      "managerFilePatterns": [
+        "*\\.yaml$/"
+      ]
+    }
+  ]
 }
