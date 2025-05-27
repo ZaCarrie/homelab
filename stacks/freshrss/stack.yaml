@@ -21,7 +21,7 @@ services:
       - ${freshrss_port}
     environment:    
       - TZ=${timezone}
-      - CRON_MIN='2,32'
+      - CRON_MIN=2,32
       - FRESHRSS_ENV=development
       # telling the enviroments "name"_FILE where to pull the secret text from inside of container
       - BASE_URL=[[FRESHRSS_BASE_URL]]
