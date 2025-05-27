@@ -10,7 +10,6 @@ enabled = true
 name = "freshrss"
 [stack.config]
 server = "docker-lxc"
-git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/freshrss"
 
