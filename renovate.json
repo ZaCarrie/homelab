@@ -8,6 +8,6 @@
     ":pinDevDependencies"
   ],
   "docker-compose": {
-    "managerFilePatterns": ["*\\.yaml"]
+    "managerFilePatterns": ["*\\.yaml$/"]
   }
 }
