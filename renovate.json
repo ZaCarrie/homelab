@@ -7,7 +7,7 @@
     ":configMigration",
     ":pinDevDependencies"
   ],
-  "docker-compose": {
+  "docker": {
     "managerFilePatterns": ["*\\.yaml$/"]
   }
 }
