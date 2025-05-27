@@ -49,3 +49,4 @@ repo = "ZaCarrie/homelab"
 git_account = "github.wish887@slmail.me"
 resource_path = ["komodo.toml"]
 managed = true
+include_variables = true
