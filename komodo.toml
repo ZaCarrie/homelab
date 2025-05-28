@@ -36,6 +36,15 @@ ADMIN_API_PASSWORD=[[FRESHRSS_ADMIN_API_PASSWORD]]
 
 ##
 
+[[stack]]
+name = "suwayomi-server"
+[stack.config]
+server = "docker-lxc"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/suwayomi-server"
+
+##
+
 [[builder]]
 name = "local"
 [builder.config]
