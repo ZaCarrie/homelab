@@ -39,3 +39,7 @@ freshrss.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8080
     import cloudflare
 }
+tachidesk.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:4567
+    import cloudflare
+}
