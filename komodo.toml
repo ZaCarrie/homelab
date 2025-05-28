@@ -7,6 +7,20 @@ enabled = true
 ##
 
 [[stack]]
+name = "caddy"
+[stack.config]
+server = "docker-lxc"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/caddy"
+environment = """
+  # VARIABLE = value
+CADDY_BASE_DOMAIN=[[CADDY_BASE_DOMAIN]]
+CADDY_CLOUDFLARE_API=[[CADDY_CLOUDFLARE_API]]
+"""
+
+##
+
+[[stack]]
 name = "freshrss"
 [stack.config]
 server = "docker-lxc"
