@@ -44,7 +44,7 @@ services:
       - BACKUP_INTERVAL=1	#Time in days - 0 to disable it - range: 1 <= n < ∞ - Interval in which the server will automatically create a backup
       - BACKUP_TTL=14	#Time in days - 0 to disable it - range: 1 <= n < ∞ - How long backup files will be kept before they will get deleted
       - FLARESOLVERR_ENABLED=true	#Whether FlareSolverr is enabled and available to use
-      - FLARESOLVERR_URL=http://${docker_lxc_ip}:8191	#The URL of the FlareSolverr instance
+      - FLARESOLVERR_URL=http://flaresolverr:8191	#The URL of the FlareSolverr instance
       - FLARESOLVERR_TIMEOUT=60	#Time in seconds for FlareSolverr to timeout if the challenge is not solved
       - FLARESOLVERR_SESSION_NAME=suwayomi	#The name of the session that Suwayomi will use with FlareSolverr
       - FLARESOLVERR_SESSION_TTL=15	#The time to live for the FlareSolverr session
