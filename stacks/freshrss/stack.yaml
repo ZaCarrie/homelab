@@ -14,9 +14,6 @@ services:
     pull_policy: ${pull_policy}
     container_name: ${container_name}
     restart: ${restart}
-    networks:
-      nginx_network:
-        ipv4_address: ${freshrss_ipv4}
     ports:
       - ${freshrss_port}
     environment:    
