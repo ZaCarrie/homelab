@@ -4,7 +4,15 @@
         resolvers 1.1.1.1
     }
 }
-https://freshrss.{$BASE_DOMAIN} {
+{$BASE_DOMAIN} {
+	respond <<HTML
+		<html>
+		  <head><title>Foo</title></head>
+		  <body>Foo</body>
+		</html>
+		HTML 200
+}
+freshrss.{$BASE_DOMAIN} {
     reverse_proxy http://{$DOCKER_LXC_IP}:8080
     import cloudflare
 }
