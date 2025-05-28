@@ -1,0 +1,27 @@
+---
+#networks:
+
+#volumes:
+
+#secrets:
+
+services:
+  caddy:
+    image: ghcr.io/caddybuilds/caddy-cloudflare@sha256:81efd50e58665f0e2bb0c3380538811058767ad8c2214219a53781c62f412dca
+    pull_policy: ${pull_policy}
+    container_name: ${caddy_container_name}
+    restart: ${restart}
+    ports:
+      - "${caddy_port_80}:80"
+      - "${caddy_port_443}:443"
+      - "${caddy_port_443}:443/udp"
+    environment:    
+      - TZ=${timezone}
+      - BASE_DOMAIN=${CADDY_BASE_DOMAIN}
+      - CLOUDFLARE_API_TOKEN=${CADDY_CLOUDFLARE_API}
+      - DOCKER_LXC_IP=${docker_lxc_ip}     
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ${share_mnt}${caddy_container_name}/data:/data
+      - ${share_mnt}${caddy_container_name}/config:/config
+
