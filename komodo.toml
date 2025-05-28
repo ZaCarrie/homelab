@@ -37,15 +37,6 @@ ADMIN_API_PASSWORD=[[FRESHRSS_ADMIN_API_PASSWORD]]
 ##
 
 [[stack]]
-name = "nginx-proxy-manager"
-[stack.config]
-server = "docker-lxc"
-repo = "ZaCarrie/homelab"
-run_directory = "stacks/nginx-proxy-manager"
-
-##
-
-[[stack]]
 name = "suwayomi-server"
 [stack.config]
 server = "docker-lxc"
