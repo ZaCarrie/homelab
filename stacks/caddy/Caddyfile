@@ -1,9 +1,36 @@
+#------------------------------------------------
+# setup cloudflare cert for import
+#------------------------------------------------
 (cloudflare) {
     tls {
         dns cloudflare {env.CLOUDFLARE_API_TOKEN}
         resolvers 1.1.1.1
     }
 }
+
+#------------------------------------------------
+# external to docker lxc
+#------------------------------------------------
+pve.{$BASE_DOMAIN} {
+    reverse_proxy 10.10.10.200:8006
+    import cloudflare
+}
+truenas.{$BASE_DOMAIN} {
+    reverse_proxy 10.10.10.10:443
+    import cloudflare
+}
+ha.{$BASE_DOMAIN} {
+    reverse_proxy 10.10.10.20:8123
+    import cloudflare
+}
+nextcloud.{$BASE_DOMAIN} {
+    reverse_proxy 10.10.10.30:443
+    import cloudflare
+}
+
+#------------------------------------------------
+# internal to docker lxc
+#------------------------------------------------
 freshrss.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8080
     import cloudflare
