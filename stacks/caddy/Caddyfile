@@ -31,6 +31,10 @@ nextcloud.{$BASE_DOMAIN} {
 #------------------------------------------------
 # internal to docker lxc
 #------------------------------------------------
+komodo.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:9120
+    import cloudflare
+}
 freshrss.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8080
     import cloudflare
