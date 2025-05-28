@@ -1,8 +1,5 @@
 ---
-networks:
-  nginx_network:
-    name: nginx_network
-    external: true
+#networks:
 
 #volumes:
 
@@ -12,7 +9,7 @@ services:
   freshrss:
     image: freshrss/freshrss@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
     pull_policy: ${pull_policy}
-    container_name: ${container_name}
+    container_name: ${freshrss_container_name}
     restart: ${restart}
     ports:
       - ${freshrss_port}
@@ -33,5 +30,5 @@ services:
         --password ${ADMIN_PASSWORD}
         --user admin
     volumes:
-      - ${share_mnt}${container_name}:/var/www/FreshRSS/data
+      - ${share_mnt}${freshrss_container_name}:/var/www/FreshRSS/data
 

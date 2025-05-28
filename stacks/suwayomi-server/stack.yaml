@@ -1,8 +1,5 @@
 ---
-networks:
-  nginx_network:
-    name: nginx_network
-    external: true
+#networks:
 
 #volumes:
 
@@ -12,13 +9,10 @@ services:
   suwayomi-server:
     image: ghcr.io/suwayomi/suwayomi-server@sha256:17cf353fe8b70a2b52f7982a58bea5e11b96a32c78c9089c55a3d795b1a17a13
     pull_policy: ${pull_policy}
-    container_name: ${container_name}
+    container_name: ${suwayomi_container_name}
     restart: ${restart}
-    networks:
-      nginx_network:
-        ipv4_address: ${suwayomi_ipv4}
     ports:
-      - ${suwayomi_port}
+      - ${suwayomi_port_4567}:4567
     environment:    
       - TZ=${timezone}
       - BIND_IP=0.0.0.0	#The interface to listen on, inside the container. You almost never want to change this.
@@ -50,21 +44,18 @@ services:
       - BACKUP_INTERVAL=1	#Time in days - 0 to disable it - range: 1 <= n < ∞ - Interval in which the server will automatically create a backup
       - BACKUP_TTL=14	#Time in days - 0 to disable it - range: 1 <= n < ∞ - How long backup files will be kept before they will get deleted
       - FLARESOLVERR_ENABLED=true	#Whether FlareSolverr is enabled and available to use
-      - FLARESOLVERR_URL=http://flaresolverr:8191	#The URL of the FlareSolverr instance
+      - FLARESOLVERR_URL=http://${docker_lxc_ip}:8191	#The URL of the FlareSolverr instance
       - FLARESOLVERR_TIMEOUT=60	#Time in seconds for FlareSolverr to timeout if the challenge is not solved
       - FLARESOLVERR_SESSION_NAME=suwayomi	#The name of the session that Suwayomi will use with FlareSolverr
       - FLARESOLVERR_SESSION_TTL=15	#The time to live for the FlareSolverr session
     volumes:
-      - ${share_mnt}${container_name}:/home/suwayomi/.local/share/Tachidesk
+      - ${share_mnt}${suwayomi_container_name}:/home/suwayomi/.local/share/Tachidesk
       
   flaresolverr:
     image: ghcr.io/thephaseless/byparr@sha256:8dc9d10b541af39bfe1eecfa7733c776025ab88471c3a429e6f7e2d7699e7932
-    container_name: flaresolverr
+    container_name: ${flaresolverr_container_name}
     restart: ${restart}
-    networks:
-      nginx_network:
-        ipv4_address: ${flaresolverr_ipv4}
     ports:
-      - ${flaresolverr_port}
+      - ${flaresolverr_port_8191}:8191
     environment:
       - TZ=${timezone}
