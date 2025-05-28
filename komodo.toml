@@ -37,7 +37,7 @@ ADMIN_API_PASSWORD=[[FRESHRSS_ADMIN_API_PASSWORD]]
 ##
 
 [[stack]]
-name = "suwayomi-server"
+name = "tachidesk"
 [stack.config]
 server = "docker-lxc"
 repo = "ZaCarrie/homelab"
