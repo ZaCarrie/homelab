@@ -4,7 +4,7 @@
         resolvers 1.1.1.1
     }
 }
-{$BASE_DOMAIN} {
+{env.BASE_DOMAIN} {
 	respond <<HTML
 		<html>
 		  <head><title>Foo</title></head>
@@ -12,7 +12,7 @@
 		</html>
 		HTML 200
 }
-freshrss.{$BASE_DOMAIN} {
-    reverse_proxy http://{$DOCKER_LXC_IP}:8080
+freshrss.{env.BASE_DOMAIN} {
+    reverse_proxy http://{env.DOCKER_LXC_IP}:8080
     import cloudflare
 }
