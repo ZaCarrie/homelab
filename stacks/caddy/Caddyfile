@@ -4,7 +4,7 @@
         resolvers 1.1.1.1
     }
 }
-freshrss.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8080
+https://freshrss.{$BASE_DOMAIN} {
+    reverse_proxy http://{$DOCKER_LXC_IP}:8080
     import cloudflare
 }
