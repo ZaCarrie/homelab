@@ -7,7 +7,7 @@
 
 services:
   freshrss:
-    image: freshrss/freshrss@sha256:ac8ba074707a020b1a865ae6671f17b6110068142484cee9f36df02ed6c41130
+    image: freshrss/freshrss@sha256:f9733e2cdf754d82e25826324fb4cbf3d736d82e2d36bf8e379dd4f0eeee0932
     pull_policy: ${pull_policy}
     container_name: ${freshrss_container_name}
     restart: ${restart}
