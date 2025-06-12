@@ -12,7 +12,11 @@
 # external to docker lxc
 #------------------------------------------------
 pve.{$BASE_DOMAIN} {
-    reverse_proxy 10.10.10.200:8006
+    reverse_proxy 10.10.10.200:8006 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
     import cloudflare
 }
 wg.{$BASE_DOMAIN} {
@@ -20,7 +24,11 @@ wg.{$BASE_DOMAIN} {
     import cloudflare
 }
 truenas.{$BASE_DOMAIN} {
-    reverse_proxy 10.10.10.10:443
+    reverse_proxy 10.10.10.10:443 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
     import cloudflare
 }
 ha.{$BASE_DOMAIN} {
