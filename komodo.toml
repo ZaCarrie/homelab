@@ -10,6 +10,9 @@ enabled = true
 name = "caddy"
 [stack.config]
 server = "Proxmox-Komodo"
+poll_for_updates = true
+auto_update = true
+auto_update_all_services = true
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/caddy"
 environment = """
