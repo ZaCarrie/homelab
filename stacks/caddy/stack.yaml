@@ -2,7 +2,19 @@
 #networks:
 
 #volumes:
-
+volumes:
+  caddy_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${caddy_container_name}/data"
+  caddy_config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${caddy_container_name}/data"
 #secrets:
 
 services:
@@ -22,6 +34,6 @@ services:
       - DOCKER_LXC_IP=${docker_lxc_ip}     
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ${share_mnt}${caddy_container_name}/data:/data
-      - ${share_mnt}${caddy_container_name}/config:/config
+      - caddy_data:/data
+      - caddy_config:/config
 
