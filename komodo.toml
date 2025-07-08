@@ -1,5 +1,5 @@
 [[server]]
-name = "docker-lxc"
+name = "Proxmox-Komodo"
 [server.config]
 address = "https://periphery:8120"
 enabled = true
@@ -9,7 +9,7 @@ enabled = true
 [[stack]]
 name = "caddy"
 [stack.config]
-server = "docker-lxc"
+server = "Proxmox-Komodo"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/caddy"
 environment = """
@@ -24,7 +24,7 @@ CADDY_CLOUDFLARE_API=[[CADDY_CLOUDFLARE_API]]
 name = "local"
 [builder.config]
 type = "Server"
-params.server_id = "docker-lxc"
+params.server_id = "Proxmox-Komodo"
 
 ##
 
