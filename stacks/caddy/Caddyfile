@@ -20,7 +20,7 @@ pve.{$BASE_DOMAIN} {
     import cloudflare
 }
 wg.{$BASE_DOMAIN} {
-    reverse_proxy 10.10.10.185:10086
+    reverse_proxy 10.10.10.46:10086
     import cloudflare
 }
 truenas.{$BASE_DOMAIN} {
