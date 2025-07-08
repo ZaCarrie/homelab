@@ -29,7 +29,7 @@ params.server_id = "Proxmox-Komodo"
 ##
 
 [[resource_sync]]
-name = "homelab"
+name = "Github"
 [resource_sync.config]
 repo = "ZaCarrie/homelab"
 git_account = "github.wish887@slmail.me"
