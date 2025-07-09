@@ -34,6 +34,7 @@ services:
       - "${wireguard_port_51821}:51821/tcp"
     environment:    
       - TZ=${timezone}
+      - WG_HOST=${WG_HOST}
     volumes:
       - etc_wireguard:/etc/wireguard
       - /lib/modules:/lib/modules:ro
