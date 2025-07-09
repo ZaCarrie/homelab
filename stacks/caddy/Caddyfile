@@ -20,7 +20,7 @@ pve.{$BASE_DOMAIN} {
     import cloudflare
 }
 wg.{$BASE_DOMAIN} {
-    reverse_proxy 10.10.10.46:10086 {
+    reverse_proxy {$DOCKER_LXC_IP}:51821 {
         transport http {
             tls_insecure_skip_verify
         }
