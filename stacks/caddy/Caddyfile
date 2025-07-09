@@ -20,11 +20,7 @@ pve.{$BASE_DOMAIN} {
     import cloudflare
 }
 wg.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:51821 {
-        transport http {
-            tls_insecure_skip_verify
-        }
-    }
+    reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
 truenas.{$BASE_DOMAIN} {
