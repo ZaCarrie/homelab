@@ -36,6 +36,7 @@ services:
       - TZ=${timezone}
       - WG_HOST=${WG_HOST}
       - WG_PORT=51822
+      - WG_DEFAULT_DNS=10.10.10.1
     volumes:
       - etc_wireguard:/etc/wireguard
       - /lib/modules:/lib/modules:ro
