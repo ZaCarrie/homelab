@@ -23,6 +23,22 @@ NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
 """
 
+[[stack]]
+name = "wg-easy"
+[stack.config]
+server = "Proxmox-Komodo"
+poll_for_updates = true
+auto_update = true
+auto_update_all_services = true
+git_account = "github.wish887@slmail.me"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/easy-wireguard"
+environment = """
+NFS_DEVICE=[[NFS_DEVICE]]
+NFS_O=[[NFS_O]]
+WG_HOST=[[WG_HOST]]
+"""
+
 ##
 
 [[builder]]
