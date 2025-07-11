@@ -43,7 +43,7 @@ https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
 }
 https://mail.{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     header Strict-Transport-Security max-age=31536000;
-    reverse_proxy http://localhost:10003
+    reverse_proxy http://{$DOCKER_LXC_IP}:10003
     import cloudflare
 }
 https://bw.{$CADDY_NEXTCLOUD_DOMAIN}:443 {
