@@ -35,7 +35,7 @@ ha.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.20:8123
     import cloudflare
 }
-{$CADDY_NEXTCLOUD_DOMAIN} {
+{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     reverse_proxy {$DOCKER_LXC_IP}:11000
     import cloudflare
 }
