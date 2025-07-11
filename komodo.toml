@@ -21,7 +21,7 @@ NFS_O=[[NFS_O]]
 """
 
 [[stack]]
-name = "wg-easy"
+name = "wgeasy"
 [stack.config]
 server = "Proxmox-Komodo"
 git_account = "github.wish887@slmail.me"
