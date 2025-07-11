@@ -23,6 +23,7 @@ services:
     pull_policy: ${pull_policy}
     container_name: ${caddy_container_name}
     restart: ${restart}
+    network_mode: host
     ports:
       - "${caddy_port_80}:80"
       - "${caddy_port_443}:443"
