@@ -10,15 +10,15 @@ volumes: # If you want to store the data on a different drive, see https://githu
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${nextcloud_container_name}"
-  nextcloud_aio_datacontainer:
-    name: nextcloud_aio_datacontainer # This line is not allowed to be changed as otherwise the built-in backup solution will not work
+  nextcloud_aio_nextcloud_datadir:
+    name: nextcloud_aio_nextcloud_datadir # This line is not allowed to be changed as otherwise the built-in backup solution will not work
     driver: local
     driver_opts:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${nextcloud_container_name}/nextcloud_data"
-  nextcloud_aio_backupcontainer:
-    name: nextcloud_aio_backupcontainer # This line is not allowed to be changed as otherwise the built-in backup solution will not work
+  nextcloud_aio_backup:
+    name: nextcloud_aio_backup # This line is not allowed to be changed as otherwise the built-in backup solution will not work
     driver: local
     driver_opts:
       type: nfs
@@ -45,7 +45,7 @@ services:
       # - BORG_RETENTION_POLICY: --keep-within=7d --keep-weekly=4 --keep-monthly=6 # Allows to adjust borgs retention policy. See https://github.com/nextcloud/all-in-one#how-to-adjust-borgs-retention-policy
       # - COLLABORA_SECCOMP_DISABLED: false # Setting this to true allows to disable Collabora's Seccomp feature. See https://github.com/nextcloud/all-in-one#how-to-disable-collaboras-seccomp-feature
       # - FULLTEXTSEARCH_JAVA_OPTIONS: "-Xms1024M -Xmx1024M" # Allows to adjust the fulltextsearch java options. See https://github.com/nextcloud/all-in-one#how-to-adjust-the-fulltextsearch-java-options
-      - NEXTCLOUD_DATADIR=nextcloud_aio_datacontainer # Allows to set the host directory for Nextcloud's datadir. ⚠️⚠️⚠️ Warning: do not set or adjust this value after the initial Nextcloud installation is done! See https://github.com/nextcloud/all-in-one#how-to-change-the-default-location-of-nextclouds-datadir
+      - NEXTCLOUD_DATADIR=nextcloud_aio_nextcloud_datadir # Allows to set the host directory for Nextcloud's datadir. ⚠️⚠️⚠️ Warning: do not set or adjust this value after the initial Nextcloud installation is done! See https://github.com/nextcloud/all-in-one#how-to-change-the-default-location-of-nextclouds-datadir
       # - NEXTCLOUD_MOUNT: /mnt/ # Allows the Nextcloud container to access the chosen directory on the host. See https://github.com/nextcloud/all-in-one#how-to-allow-the-nextcloud-container-to-access-directories-on-the-host
       # - NEXTCLOUD_UPLOAD_LIMIT: 16G # Can be adjusted if you need more. See https://github.com/nextcloud/all-in-one#how-to-adjust-the-upload-limit-for-nextcloud
       # - NEXTCLOUD_MAX_TIME: 3600 # Can be adjusted if you need more. See https://github.com/nextcloud/all-in-one#how-to-adjust-the-max-execution-time-for-nextcloud
@@ -63,5 +63,6 @@ services:
     volumes:
       - nextcloud_aio_mastercontainer:/mnt/docker-aio-config # This line is not allowed to be changed as otherwise the built-in backup solution will not work
       - /var/run/docker.sock:/var/run/docker.sock:ro # May be changed on macOS, Windows or docker rootless. See the applicable documentation. If adjusting, don't forget to also set 'WATCHTOWER_DOCKER_SOCKET_PATH'!
-      - nextcloud_aio_backupcontainer:/placeholderfoldertocreatebackupvolume
+      #- nextcloud_aio_nextcloud_datadir:/placeholderfoldertocreatedatavolume
+      #- nextcloud_aio_backupcontainer:/placeholderfoldertocreatebackupvolume
 
