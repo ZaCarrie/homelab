@@ -19,10 +19,6 @@ pve.{$BASE_DOMAIN} {
     }
     import cloudflare
 }
-wg.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:51821
-    import cloudflare
-}
 truenas.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.10:443 {
         transport http {
@@ -35,9 +31,24 @@ ha.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.20:8123
     import cloudflare
 }
+
+
+#------------------------------------------------
+# nextcloud 
+#------------------------------------------------
 https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     header Strict-Transport-Security max-age=31536000;
     reverse_proxy localhost:11000
+    import cloudflare
+}
+https://mail.{$CADDY_NEXTCLOUD_DOMAIN}:443 {
+    header Strict-Transport-Security max-age=31536000;
+    reverse_proxy localhost:10003
+    import cloudflare
+}
+https://bw.{$CADDY_NEXTCLOUD_DOMAIN}:443 {
+    header Strict-Transport-Security max-age=31536000;
+    reverse_proxy localhost:8812
     import cloudflare
 }
 
@@ -48,11 +59,7 @@ komodo.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:9120
     import cloudflare
 }
-freshrss.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8080
-    import cloudflare
-}
-tachidesk.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:4567
+wg.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
