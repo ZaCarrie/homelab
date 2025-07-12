@@ -34,7 +34,7 @@ ha.{$BASE_DOMAIN} {
 
 
 #------------------------------------------------
-# nextcloud 
+# nextcloud server
 #------------------------------------------------
 https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     reverse_proxy 10.10.10.12:11000
@@ -44,15 +44,16 @@ https://*.{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     reverse_proxy https://10.10.10.12:443
     import cloudflare
 }
+wg.{$BASE_DOMAIN} {
+    reverse_proxy 10.10.10.12:51821
+    import cloudflare
+}
+
 
 #------------------------------------------------
-# internal to docker lxc
+# main komodo server
 #------------------------------------------------
 komodo.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:9120
-    import cloudflare
-}
-wg.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
