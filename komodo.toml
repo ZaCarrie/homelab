@@ -4,6 +4,12 @@ name = "Proxmox-Komodo"
 address = "https://periphery:8120"
 enabled = true
 
+[[server]]
+name = "Nextcloud"
+[server.config]
+address = "https://10.10.10.12:8120"
+enabled = true
+
 ##
 
 [[stack]]
@@ -24,7 +30,7 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 [[stack]]
 name = "wgeasy"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "Nextcloud"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/easy-wireguard"
@@ -37,7 +43,7 @@ WG_HOST=[[WG_HOST]]
 [[stack]]
 name = "nextcloud"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "Nextcloud"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/nextcloud"
