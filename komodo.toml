@@ -30,7 +30,7 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 [[stack]]
 name = "wgeasy"
 [stack.config]
-server = "Nextcloud"
+server = "Proxmox-Komodo"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/easy-wireguard"
