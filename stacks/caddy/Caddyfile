@@ -36,8 +36,8 @@ ha.{$BASE_DOMAIN} {
 #------------------------------------------------
 # nextcloud server
 #------------------------------------------------
-https://*.{$CADDY_NEXTCLOUD_DOMAIN} {
-    reverse_proxy https://10.10.10.12:11000{
+*.{$CADDY_NEXTCLOUD_DOMAIN} {
+    reverse_proxy https://10.10.10.12:11000 {
         header_up Host {upstream_hostport}
     }
 }
