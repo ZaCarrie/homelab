@@ -61,9 +61,9 @@ wg.{$BASE_DOMAIN} {
 }
 # matrix
 matrix.{$BASE_DOMAIN2} {
-  reverse_proxy /_matrix/* localhost:8008
-  reverse_proxy /_synapse/client/* localhost:8008
-  import cloudflare
+	reverse_proxy /_matrix/* localhost:8008
+	reverse_proxy /_synapse/client/* localhost:8008
+	import cloudflare
 }
 {$BASE_DOMAIN2} {
 	header /.well-known/matrix/* Content-Type application/json
