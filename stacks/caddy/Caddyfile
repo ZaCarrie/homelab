@@ -11,6 +11,7 @@
 #------------------------------------------------
 # external to docker lxc
 #------------------------------------------------
+# proxmox
 pve.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.200:8006 {
         transport http {
@@ -19,6 +20,7 @@ pve.{$BASE_DOMAIN} {
     }
     import cloudflare
 }
+# truenas
 truenas.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.10:443 {
         transport http {
@@ -27,6 +29,7 @@ truenas.{$BASE_DOMAIN} {
     }
     import cloudflare
 }
+# homeassistant
 ha.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.20:8123
     import cloudflare
@@ -36,6 +39,7 @@ ha.{$BASE_DOMAIN} {
 #------------------------------------------------
 # nextcloud server
 #------------------------------------------------
+# nextcloud
 https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     reverse_proxy 10.10.10.12:11000
     import cloudflare
@@ -45,21 +49,26 @@ https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
 #------------------------------------------------
 # main komodo server
 #------------------------------------------------
+# komodo gui
 komodo.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:9120
     import cloudflare
 }
+# wg dashboard
 wg.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
+# matrix
 matrix.{$BASE_DOMAIN2} {
   reverse_proxy /_matrix/* localhost:8008
   reverse_proxy /_synapse/client/* localhost:8008
   import cloudflare
 }
-
-{$BASE_DOMAIN2}:8448 {
-  reverse_proxy /_matrix/* localhost:8008
-  import cloudflare
+{$BASE_DOMAIN2} {
+	header /.well-known/matrix/* Content-Type application/json
+	header /.well-known/matrix/* Access-Control-Allow-Origin *
+	respond /.well-known/matrix/server `{"m.server": "matrix.{$BASE_DOMAIN2}:443"}`
+	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.{$BASE_DOMAIN2}"},"m.identity_server":{"base_url":"https://vector.im"}}`
+    import cloudflare
 }
