@@ -53,3 +53,13 @@ wg.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
+matrix.{$BASE_DOMAIN2} {
+  reverse_proxy /_matrix/* localhost:8008
+  reverse_proxy /_synapse/client/* localhost:8008
+  import cloudflare
+}
+
+{$BASE_DOMAIN2}:8448 {
+  reverse_proxy /_matrix/* localhost:8008
+  import cloudflare
+}

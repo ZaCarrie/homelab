@@ -1,0 +1,25 @@
+---
+#networks:
+
+volumes:
+  matrix-nfs:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${matrix_container_name}"
+
+#secrets:
+
+services:
+  matrix-synapse:
+    image: docker.io/matrixdotorg/synapse:latest
+    container_name: ${matrix_container_name}
+    restart: ${restart}
+    ports:
+      - "${matrix_port_8008}:8008"
+    environment:    
+      - TZ=${timezone}
+    volumes:
+      - matrix-nfs:/data
+

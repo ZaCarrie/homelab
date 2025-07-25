@@ -31,6 +31,7 @@ services:
     environment:    
       - TZ=${timezone}
       - BASE_DOMAIN=${CADDY_BASE_DOMAIN}
+      - BASE_DOMAIN2=${CADDY_BASE_DOMAIN2}
       - CLOUDFLARE_API_TOKEN=${CADDY_CLOUDFLARE_API}
       - CADDY_NEXTCLOUD_DOMAIN=${CADDY_NEXTCLOUD_DOMAIN}
       - DOCKER_LXC_IP=${docker_lxc_ip}     
