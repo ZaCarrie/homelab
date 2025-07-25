@@ -61,14 +61,14 @@ wg.{$BASE_DOMAIN} {
 }
 # matrix
 matrix.{$BASE_DOMAIN2} {
-	reverse_proxy /_matrix/* localhost:8008
-	reverse_proxy /_synapse/client/* localhost:8008
-	import cloudflare
+    reverse_proxy /_matrix/* localhost:8008
+    reverse_proxy /_synapse/client/* localhost:8008
+    import cloudflare
 }
 {$BASE_DOMAIN2} {
-	header /.well-known/matrix/* Content-Type application/json
-	header /.well-known/matrix/* Access-Control-Allow-Origin *
-	respond /.well-known/matrix/server `{"m.server": "matrix.{$BASE_DOMAIN2}:443"}`
-	respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.{$BASE_DOMAIN2}"},"m.identity_server":{"base_url":"https://vector.im"}}`
+    header /.well-known/matrix/* Content-Type application/json
+    header /.well-known/matrix/* Access-Control-Allow-Origin *
+    respond /.well-known/matrix/server `{"m.server": "matrix.{$BASE_DOMAIN2}:443"}`
+    respond /.well-known/matrix/client `{"m.homeserver":{"base_url":"https://matrix.{$BASE_DOMAIN2}"},"m.identity_server":{"base_url":"https://vector.im"}}`
     import cloudflare
 }
