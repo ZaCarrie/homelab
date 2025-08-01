@@ -7,7 +7,7 @@
 
 services:
   suwayomi-server:
-    image: ghcr.io/suwayomi/suwayomi-server@sha256:17cf353fe8b70a2b52f7982a58bea5e11b96a32c78c9089c55a3d795b1a17a13
+    image: ghcr.io/suwayomi/suwayomi-server@sha256:acad9ea1cbb968bc95477a69e32dbc682b710a00ed6e7b06f0eb167caf382e81
     pull_policy: ${pull_policy}
     container_name: ${suwayomi_container_name}
     restart: ${restart}
