@@ -31,7 +31,7 @@ truenas.{$BASE_DOMAIN} {
 }
 # homeassistant
 ha.{$BASE_DOMAIN} {
-    reverse_proxy 10.10.10.20:8123
+    reverse_proxy 10.10.10.234:8123
     import cloudflare
 }
 
