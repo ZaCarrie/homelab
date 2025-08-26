@@ -19,7 +19,7 @@ volumes:
 
 services:
   caddy:
-    image: ghcr.io/caddybuilds/caddy-cloudflare@sha256:81efd50e58665f0e2bb0c3380538811058767ad8c2214219a53781c62f412dca
+    image: ghcr.io/caddybuilds/caddy-cloudflare@sha256:4a3d4afed443f026040cad84b48ef2eef6cc6eb5a80a3ecab66a03df469a46f8
     pull_policy: ${pull_policy}
     container_name: ${caddy_container_name}
     restart: ${restart}
