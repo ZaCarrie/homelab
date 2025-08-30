@@ -36,7 +36,7 @@ ha.{$BASE_DOMAIN} {
 }
 http://homeassistant.camera/api/ {
     handle /* {
-        reverse_proxy http://10.10.10.234:8123/api/ {
+        reverse_proxy http://10.10.10.234:8123 {
             method GET
             transport http {
                 versions 1.1
