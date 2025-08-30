@@ -35,10 +35,15 @@ ha.{$BASE_DOMAIN} {
     import cloudflare
 }
 http://homeassistant.camera {
-    reverse_proxy http://10.10.10.234:8123 {
-        header_up Host $host:8080
-        header_up Content-Type application/json
-        header_up Authorization "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmY2Q0ODE3Yjc5MGQ0NjNmYmRiYWU0OTA0OGVjMWMxZCIsImlhdCI6MTc1NjQyNjM4NywiZXhwIjoyMDcxNzg2Mzg3fQ.tCcmG_DDRv_hVAEWvZA4GgHY1nJpdrv9WiJMm3hMBdY"
+    handle /* {
+        reverse_proxy http://10.10.10.234:8123 {
+            transport http {
+                versions 1.1
+            }
+            header_up Host $host:8080
+            header_up Content-Type application/json
+            header_up Authorization "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmY2Q0ODE3Yjc5MGQ0NjNmYmRiYWU0OTA0OGVjMWMxZCIsImlhdCI6MTc1NjQyNjM4NywiZXhwIjoyMDcxNzg2Mzg3fQ.tCcmG_DDRv_hVAEWvZA4GgHY1nJpdrv9WiJMm3hMBdY"
+        }
     }
 }
 
