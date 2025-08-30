@@ -34,7 +34,7 @@ ha.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.234:8123
     import cloudflare
 }
-http://homeassistant.camera/api/ {
+http://homeassistant.camera {
     handle /* {
         reverse_proxy http://10.10.10.234:8123 {
             method GET
