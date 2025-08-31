@@ -2,12 +2,12 @@
 #networks:
 
 volumes:
-  frigate_config:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${frigate_container_name}/config"
+#  frigate_config:
+#    driver: local
+#    driver_opts:
+#      type: nfs
+#      o: ${NFS_O}
+#      device: ":${NFS_DEVICE}/${frigate_container_name}/config"
   frigate_storage:
     driver: local
     driver_opts:
@@ -35,7 +35,7 @@ services:
       - "${frigate_container_port8555}:8555/udp" # WebRTC over udp 
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - frigate_config:/config
+      - /data/frigate/config:/config
       - frigate_storage:/media/frigate
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
