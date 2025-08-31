@@ -13,7 +13,7 @@ volumes:
     driver_opts:
       type: nfs
       o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${frigate_container_name}/config"
+      device: ":${NFS_DEVICE}/${frigate_container_name}/media"
 
 #secrets:
 
