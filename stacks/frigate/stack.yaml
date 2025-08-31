@@ -27,11 +27,11 @@ services:
     stop_grace_period: 30s
     shm_size: "4gb"
     ports:
-      - "${frigate_container_port:8971}:8971"
+      - "${frigate_container_port8971}:8971"
       # - "5000:5000" # Internal unauthenticated access. Expose carefully.
-      - "${frigate_container_port:8554}:8554" # RTSP feeds
-      - "${frigate_container_port:8555}:8555/tcp" # WebRTC over tcp
-      - "${frigate_container_port:8555}:8555/udp" # WebRTC over udp
+      - "${frigate_container_port8554}:8554" # RTSP feeds
+      - "${frigate_container_port8555}:8555/tcp" # WebRTC over tcp
+      - "${frigate_container_port8555}:8555/udp" # WebRTC over udp
     environment:    
     volumes:
       - /etc/localtime:/etc/localtime:ro
