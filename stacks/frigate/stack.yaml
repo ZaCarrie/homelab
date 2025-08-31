@@ -33,6 +33,8 @@ services:
       - "${frigate_container_port8554}:8554" # RTSP feeds
       - "${frigate_container_port8555}:8555/tcp" # WebRTC over tcp
       - "${frigate_container_port8555}:8555/udp" # WebRTC over udp 
+    environment: 
+      - LIBVA_DRIVER_NAME=radeonsi
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /data/frigate/config:/config
