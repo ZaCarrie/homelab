@@ -40,10 +40,10 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /data/frigate/config:/config
       - /data/frigate/recording:/media/frigate
-      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
-        target: /tmp/cache
-        tmpfs:
-          size: 1000000000
+      #- type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+      #  target: /tmp/cache
+      #  tmpfs:
+      #    size: 1000000000
     devices:
       #- /dev/bus/usb:/dev/bus/usb # Passes the USB Coral, needs to be modified for other versions
       #- /dev/apex_0:/dev/apex_0 # Passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
