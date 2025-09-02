@@ -8,12 +8,12 @@ volumes:
 #      type: nfs
 #      o: ${NFS_O}
 #      device: ":${NFS_DEVICE}/${frigate_container_name}/config"
-  frigate_storage:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${frigate_container_name}/media"
+#  frigate_storage:
+#    driver: local
+#    driver_opts:
+#      type: nfs
+#      o: ${NFS_O}
+#      device: ":${NFS_DEVICE}/${frigate_container_name}/media"
 
 #secrets:
 
@@ -39,7 +39,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /data/frigate/config:/config
-      - frigate_storage:/media/frigate
+      - /data/frigate/recording:/media/frigate
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
         tmpfs:
