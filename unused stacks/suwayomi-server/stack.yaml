@@ -52,7 +52,7 @@ services:
       - ${share_mnt}${suwayomi_container_name}:/home/suwayomi/.local/share/Tachidesk
       
   flaresolverr:
-    image: ghcr.io/thephaseless/byparr@sha256:2f444712578eae74508dc1e100900114b08e4421e708cb13b07f3dce76a7d956
+    image: ghcr.io/thephaseless/byparr@sha256:453ddd73debc110f42290d6d3b2bbe9b53c3ca7fed03beedd34538efdab46ea0
     container_name: ${flaresolverr_container_name}
     restart: ${restart}
     ports:
