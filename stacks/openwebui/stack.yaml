@@ -1,0 +1,21 @@
+---
+#networks:
+
+volumes:
+  open-webui:
+#secrets:
+
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    pull_policy: ${pull_policy}
+    container_name: ${openwebui_container_name}
+    restart: ${restart}
+    ports:
+      - "${openwebui_port_8080}:8080"
+    environment: 
+      - 'OLLAMA_BASE_URL=https://ollama.zacarrie.com'
+    volumes:
+      - open-webui:/app/backend/data
+
+
