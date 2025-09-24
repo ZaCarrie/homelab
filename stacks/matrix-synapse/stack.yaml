@@ -13,7 +13,7 @@ volumes:
 
 services:
   matrix-synapse:
-    image: docker.io/matrixdotorg/synapse:latest@sha256:723374aaf523fb6dd261c75c75073faba561681a93a248b1ac200c860f2b34c0
+    image: docker.io/matrixdotorg/synapse:latest@sha256:c8f2742b90ff8777bdfacadf849bc4cdd071fe86770b378cc7700c0ce153d863
     container_name: ${matrix_container_name}
     restart: ${restart}
     ports:
