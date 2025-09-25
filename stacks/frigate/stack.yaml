@@ -19,7 +19,7 @@
 
 services:
   frigate:
-    image: ghcr.io/blakeblackshear/frigate:stable
+    image: ghcr.io/blakeblackshear/frigate:stable@sha256:cb6624b9075f76ece626139eedca7e728cab1456a5f8c351afbf877320826bc1
     pull_policy: ${pull_policy}
     container_name: ${frigate_container_name}
     restart: ${restart}
