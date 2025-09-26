@@ -66,6 +66,11 @@ wg.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
+# wg dashboard
+frigate.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:5000
+    import cloudflare
+}
 # matrix
 matrix.{$BASE_DOMAIN2} {
     reverse_proxy /_matrix/* localhost:8008
