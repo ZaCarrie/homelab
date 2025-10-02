@@ -61,12 +61,17 @@ komodo.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:9120
     import cloudflare
 }
+# navidrome
+navidrome.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:4533
+    import cloudflare
+}
 # wg dashboard
 wg.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:51821
     import cloudflare
 }
-# wg dashboard
+# frigate
 frigate.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:5000
     import cloudflare
