@@ -14,12 +14,25 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${navidrome_container_name}/music"
+  beets_config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${beets_container_name}/config"
+  beets_input:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${beets_container_name}/input"
 
 #secrets:
 
 services:
   navidrome:
     image: deluan/navidrome:latest@sha256:2ae037d464de9f802d047165a13b1c9dc2bdbb14920a317ae4aef1233adc0a3c
+    user: 1000:1000
     pull_policy: ${pull_policy}
     container_name: ${navidrome_container_name}
     restart: ${restart}
@@ -29,4 +42,22 @@ services:
     volumes:
       - navidrome_data:/data
       - /lib/modules:/music:ro
+  
+  beets-flask:
+    image: pspitzner/beets-flask:stable
+    restart: ${pull_policy}
+    container_name: ${beets_container_name}
+    ports:
+      - "${beets_port_5001}:5001"
+    environment:
+      # 502 is default on macos, 1000 on linux
+      TZ: America/Chicago
+      USER_ID: 1000
+      GROUP_ID: 1000
+    volumes:
+      - beets_config:/config
+      # for music folders, match paths inside and out of container!
+      - beets_input:/music_path/inbox/
+      - navidrome_music:/music_path/clean/
+
 
