@@ -44,7 +44,7 @@ services:
       - navidrome_music:/music:ro
   
   beets-flask:
-    image: pspitzner/beets-flask:stable
+    image: pspitzner/beets-flask:stable@sha256:0e707cbbcf563754acd0e67a435f67ed298e68e1ff910d484b67eceea9094b1b
     restart: ${pull_policy}
     container_name: ${beets_container_name}
     ports:
