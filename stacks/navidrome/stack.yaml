@@ -41,7 +41,7 @@ services:
     #environment:    
     volumes:
       - navidrome_data:/data
-      - /lib/modules:/music:ro
+      - navidrome_music:/music:ro
   
   beets-flask:
     image: pspitzner/beets-flask:stable
