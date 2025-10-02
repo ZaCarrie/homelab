@@ -1,0 +1,32 @@
+---
+#networks:
+
+volumes:
+  navidrome_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${navidrome_container_name}/data"
+  navidrome_music:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${navidrome_container_name}/music"
+
+#secrets:
+
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    pull_policy: ${pull_policy}
+    container_name: ${navidrome_container_name}
+    restart: ${restart}
+    ports:
+      - "${navidrome_port_4533}:4533"
+    #environment:    
+    volumes:
+      - navidrome_data:/data
+      - /lib/modules:/music:ro
+
