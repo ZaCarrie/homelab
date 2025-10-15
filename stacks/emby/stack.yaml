@@ -1,0 +1,45 @@
+---
+#networks:
+
+volumes:
+  emby_config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${emby_container_name}/config"
+  emby_tvshows:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${emby_container_name}/tvshows"
+  emby_movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${emby_container_name}/movies"
+
+#secrets:
+
+services:
+  emby:
+    image: emby/embyserver
+    pull_policy: ${pull_policy}
+    container_name: ${emby_container_name}
+    restart: ${restart}
+    ports:
+      - ${emby_port_8096}:8096 # HTTP port
+      - ${emby_port_8920}:8920 # HTTPS port
+    environment: 
+      - UID=1000
+      - GID=100
+    volumes:
+      - emby_config:/config # Configuration directory
+      - emby_tvshows:/mnt/share1 # Media directory
+      - emby_movies:/mnt/share2 # Media directory
+    devices:
+      - /dev/dri:/dev/dri
+
+
