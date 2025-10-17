@@ -20,12 +20,7 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${emby_container_name}/movies"
-  emby_other:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${emby_container_name}/other"
+
 
 #secrets:
 
@@ -45,7 +40,6 @@ services:
       - emby_config:/config # Configuration directory
       - emby_tvshows:/mnt/share1 # Media directory
       - emby_movies:/mnt/share2 # Media directory
-      - emby_other:/mnt/share3 
     devices:
       - /dev/dri:/dev/dri
 
