@@ -1,13 +1,15 @@
 [[server]]
-name = "Proxmox-Komodo"
-[server.config]
-address = "https://periphery:8120"
-enabled = true
-
-[[server]]
 name = "Nextcloud"
 [server.config]
 address = "https://10.10.10.12:8120"
+enabled = true
+
+##
+
+[[server]]
+name = "Proxmox-Komodo"
+[server.config]
+address = "https://periphery:8120"
 enabled = true
 
 ##
@@ -27,6 +29,8 @@ NFS_O=[[NFS_O]]
 CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 """
 
+##
+
 [[stack]]
 name = "emby"
 [stack.config]
@@ -39,6 +43,8 @@ NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
 """
 
+##
+
 [[stack]]
 name = "frigate"
 [stack.config]
@@ -46,6 +52,8 @@ server = "Proxmox-Komodo"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/frigate"
+
+##
 
 [[stack]]
 name = "navidrome"
@@ -59,6 +67,8 @@ NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
 """
 
+##
+
 [[stack]]
 name = "nextcloud"
 [stack.config]
@@ -71,6 +81,8 @@ NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
 """
 
+##
+
 [[stack]]
 name = "openwebui"
 [stack.config]
@@ -78,6 +90,8 @@ server = "Proxmox-Komodo"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/openwebui"
+
+##
 
 [[stack]]
 name = "wgeasy"
@@ -108,3 +122,4 @@ name = "Github"
 repo = "ZaCarrie/homelab"
 git_account = "github.wish887@slmail.me"
 resource_path = ["komodo.toml"]
+managed = true
