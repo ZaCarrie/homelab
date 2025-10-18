@@ -128,6 +128,29 @@ repo = "ZaCarrie/homelab"
 
 [[procedure]]
 name = "pull repo then redeploy on changes"
+config.schedule = "* */5 * * * *"
+config.schedule_format = "Cron"
+
+[[procedure.config.stage]]
+name = "Stage 1"
+enabled = true
+executions = [
+  { execution.type = "PullRepo", execution.params.repo = "Homelab", enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Stage 2"
+enabled = true
+executions = [
+  { execution.type = "RunSync", execution.params.sync = "Github", enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Stage 3"
+enabled = true
+executions = [
+  { execution.type = "BatchDeployStackIfChanged", execution.params.pattern = "*", enabled = true }
+]
 
 ##
 
