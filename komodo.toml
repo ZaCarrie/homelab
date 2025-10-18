@@ -20,7 +20,7 @@ name = "caddy"
 server = "Proxmox-Komodo"
 auto_update = true
 auto_update_all_services = true
-repo = "ZaCarrie/homelab"
+linked_repo = "Homelab"
 run_directory = "stacks/caddy"
 environment = """
 CADDY_BASE_DOMAIN=[[CADDY_BASE_DOMAIN]]
@@ -119,6 +119,21 @@ NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
 WG_HOST=[[WG_HOST]]
 """
+
+##
+
+[[repo]]
+name = "Homelab"
+[repo.config]
+server = "Proxmox-Komodo"
+builder = "local"
+git_account = "github.wish887@slmail.me"
+repo = "ZaCarrie/homelab"
+
+##
+
+[[procedure]]
+name = "pull repo then redeploy on changes"
 
 ##
 
