@@ -18,6 +18,8 @@ enabled = true
 name = "caddy"
 [stack.config]
 server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/caddy"
 environment = """
@@ -35,6 +37,8 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 name = "emby"
 [stack.config]
 server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/emby"
@@ -49,6 +53,8 @@ NFS_O=[[NFS_O]]
 name = "frigate"
 [stack.config]
 server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/frigate"
@@ -59,6 +65,8 @@ run_directory = "stacks/frigate"
 name = "navidrome"
 [stack.config]
 server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/navidrome"
@@ -73,6 +81,8 @@ NFS_O=[[NFS_O]]
 name = "nextcloud"
 [stack.config]
 server = "Nextcloud"
+auto_update = true
+auto_update_all_services = true
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/nextcloud"
@@ -87,6 +97,8 @@ NFS_O=[[NFS_O]]
 name = "openwebui"
 [stack.config]
 server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/openwebui"
@@ -97,6 +109,8 @@ run_directory = "stacks/openwebui"
 name = "wgeasy"
 [stack.config]
 server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/easy-wireguard"
