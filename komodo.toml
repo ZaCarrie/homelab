@@ -19,7 +19,6 @@ server = "Proxmox-Komodo"
 repo = "ZaCarrie/homelab"
 run_directory = "stacks/caddy"
 environment = """
-  # VARIABLE = value
 CADDY_BASE_DOMAIN=[[CADDY_BASE_DOMAIN]]
 CADDY_BASE_DOMAIN2=[[CADDY_BASE_DOMAIN2]]
 CADDY_CLOUDFLARE_API=[[CADDY_CLOUDFLARE_API]]
@@ -29,16 +28,35 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 """
 
 [[stack]]
-name = "wgeasy"
+name = "emby"
 [stack.config]
 server = "Proxmox-Komodo"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
-run_directory = "stacks/easy-wireguard"
+run_directory = "stacks/emby"
 environment = """
 NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
-WG_HOST=[[WG_HOST]]
+"""
+
+[[stack]]
+name = "frigate"
+[stack.config]
+server = "Proxmox-Komodo"
+git_account = "github.wish887@slmail.me"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/frigate"
+
+[[stack]]
+name = "navidrome"
+[stack.config]
+server = "Proxmox-Komodo"
+git_account = "github.wish887@slmail.me"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/navidrome"
+environment = """
+NFS_DEVICE=[[NFS_DEVICE]]
+NFS_O=[[NFS_O]]
 """
 
 [[stack]]
@@ -51,6 +69,27 @@ run_directory = "stacks/nextcloud"
 environment = """
 NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
+"""
+
+[[stack]]
+name = "openwebui"
+[stack.config]
+server = "Proxmox-Komodo"
+git_account = "github.wish887@slmail.me"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/openwebui"
+
+[[stack]]
+name = "wgeasy"
+[stack.config]
+server = "Proxmox-Komodo"
+git_account = "github.wish887@slmail.me"
+repo = "ZaCarrie/homelab"
+run_directory = "stacks/easy-wireguard"
+environment = """
+NFS_DEVICE=[[NFS_DEVICE]]
+NFS_O=[[NFS_O]]
+WG_HOST=[[WG_HOST]]
 """
 
 ##
