@@ -80,6 +80,11 @@ frigate.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:5000
     import cloudflare
 }
+# emby
+emby.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:8096
+    import cloudflare
+}
 # matrix
 matrix.{$BASE_DOMAIN2} {
     reverse_proxy /_matrix/* localhost:8008
