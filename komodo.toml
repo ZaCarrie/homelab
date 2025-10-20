@@ -155,6 +155,19 @@ executions = [
 
 ##
 
+[[procedure]]
+name = "run github sync"
+config.schedule = "1 */10 * * * *"
+
+[[procedure.config.stage]]
+name = "Stage 1"
+enabled = true
+executions = [
+  { execution.type = "RunSync", execution.params.sync = "Github", enabled = true }
+]
+
+##
+
 [[builder]]
 name = "local"
 [builder.config]
