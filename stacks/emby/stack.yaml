@@ -19,7 +19,7 @@ volumes:
     driver_opts:
       type: nfs
       o: ${NFS_O}
-      device: ":${NFS_DEVICE_MEDIA/movies"
+      device: ":${NFS_DEVICE_MEDIA}/movies"
 
 
 #secrets:
