@@ -13,13 +13,13 @@ volumes:
     driver_opts:
       type: nfs
       o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${emby_container_name}/tvshows"
+      device: ":${NFS_DEVICE_MEDIA}/tvshows"
   emby_movies:
     driver: local
     driver_opts:
       type: nfs
       o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${emby_container_name}/movies"
+      device: ":${NFS_DEVICE_MEDIA/movies"
 
 
 #secrets:
