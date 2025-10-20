@@ -34,22 +34,6 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 ##
 
 [[stack]]
-name = "emby"
-[stack.config]
-server = "Proxmox-Komodo"
-auto_update = true
-auto_update_all_services = true
-linked_repo = "Homelab"
-run_directory = "stacks/emby"
-environment = """
-NFS_DEVICE=[[NFS_DEVICE]]
-NFS_DEVICE_MEDIA=[[NFS_DEVICE_MEDIA]]
-NFS_O=[[NFS_O]]
-"""
-
-##
-
-[[stack]]
 name = "frigate"
 [stack.config]
 server = "Proxmox-Komodo"
