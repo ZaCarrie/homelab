@@ -80,8 +80,8 @@ frigate.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:5000
     import cloudflare
 }
-# emby
-emby.{$BASE_DOMAIN} {
+# jellyfin
+jellyfin.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8096
     import cloudflare
 }
