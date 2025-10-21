@@ -94,3 +94,8 @@ prowlarr.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:9696
     import cloudflare
 }
+# qbittorrent
+qb.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:9696
+    import cloudflare
+}
