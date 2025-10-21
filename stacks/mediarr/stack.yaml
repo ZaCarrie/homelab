@@ -59,23 +59,6 @@ services:
     devices:
       - /dev/dri:/dev/dri
 
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
-    pull_policy: ${pull_policy}
-    container_name: ${prowlarr_container_name}
-    restart: ${restart}
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.10
-    ports:
-      - ${prowlarr_port_9696}:9696
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - prowlarr_config:/config
-
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     pull_policy: ${pull_policy}
@@ -93,5 +76,28 @@ services:
       - TZ=America/Chicago
     volumes:
       - prowlarr_config:/config
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    pull_policy: ${pull_policy}
+    container_name: ${prowlarr_container_name}
+    restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.10
+    ports:
+      - ${prowlarr_port_9696}:9696
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - prowlarr_config:/config
+    depends_on:
+      flaresolverr:
+        condition: service_healthy
+        restart: true
+
+
 
 
