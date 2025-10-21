@@ -33,6 +33,18 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${prowlarr_container_name}/config"
+  qbittorrent_config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${qbittorrent_container_name}/config"
+  qbittorrent_downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${qbittorrent_container_name}/downloads"
 
 
 #secrets:
@@ -53,9 +65,9 @@ services:
       - GID=1000
       - TZ=America/Chicago
     volumes:
-      - jellyfin_config:/config # Configuration directory
-      - media_tvshows:/data/tvshows # Media directory
-      - media_movies:/data/movies # Media directory
+      - jellyfin_config:/config
+      - media_tvshows:/data/tvshows
+      - media_movies:/data/movies
     devices:
       - /dev/dri:/dev/dri
 
@@ -74,14 +86,37 @@ services:
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=America/Chicago
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    pull_policy: ${pull_policy}
+    container_name: ${qbittorrent_container_name}
+    restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.20
+    ports:
+      - ${qbittorrent_port_8080}:8080
+      - ${qbittorrent_port_6881}:6881
+      - ${qbittorrent_port_6881}:6881/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
     volumes:
-      - prowlarr_config:/config
+      - qbittorrent_config:/config
+      - qbittorrent_downloads:/downloads
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     pull_policy: ${pull_policy}
     container_name: ${prowlarr_container_name}
     restart: ${restart}
+    depends_on:
+      - flaresolverr
+      - qbittorrent
     networks:
       mediarr:
         ipv4_address: 10.20.20.10
@@ -93,8 +128,6 @@ services:
       - TZ=America/Chicago
     volumes:
       - prowlarr_config:/config
-    depends_on:
-      flaresolverr:
 
 
 
