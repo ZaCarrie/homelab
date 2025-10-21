@@ -1,5 +1,12 @@
 ---
-#networks:
+networks:
+  mediarr:
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.20.20.0/24
 
 volumes:
   jellyfin_config:
@@ -30,6 +37,9 @@ services:
     pull_policy: ${pull_policy}
     container_name: ${jellyfin_container_name}
     restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.5
     ports:
       - ${jellyfin_port_8096}:8096
     environment: 
