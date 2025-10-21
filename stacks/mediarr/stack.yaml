@@ -27,6 +27,18 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${qbittorrent_container_name}/downloads"
+  sabnzbd_incomplete_downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${sabnzbd_container_name}/incomplete_downloads"
+  sabnzbd_downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${sabnzbd_container_name}/downloads"
 
 
 
@@ -92,6 +104,26 @@ services:
       - /docker/qbittorrent/config:/config
       - qbittorrent_downloads:/downloads
 
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    pull_policy: ${pull_policy}
+    container_name: ${sabnzbd_container_name}
+    restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.45
+    ports:
+      - ${sabnzbd_port_8080}:8080
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/sabnzbd/config:/config
+      - sabnzbd_incomplete_downloads:/incomplete-downloads
+      - sabnzbd_downloads:/downloads 
+
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     pull_policy: ${pull_policy}
@@ -100,6 +132,7 @@ services:
     depends_on:
       - flaresolverr
       - qbittorrent
+      - sabnzbd
     networks:
       mediarr:
         ipv4_address: 10.20.20.10
