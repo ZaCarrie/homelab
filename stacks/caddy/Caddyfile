@@ -104,3 +104,8 @@ radarr.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:7878
     import cloudflare
 }
+# sonarr
+sonarr.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:8989
+    import cloudflare
+}

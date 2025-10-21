@@ -51,6 +51,12 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${radarr_container_name}/config"
+  sonarr_config:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/${sonarr_container_name}/config"
 
 
 #secrets:
@@ -156,6 +162,26 @@ services:
       - media_movies:/movies
       - qbittorrent_downloads:/downloads
 
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    pull_policy: ${pull_policy}
+    container_name: ${sonarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - prowlarr
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.30
+    ports:
+      - ${sonarr_port_8989}:8989
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - sonarr_config:/config
+      - media_tvshows:/tv
+      - qbittorrent_downloads:/downloads
 
 
 
