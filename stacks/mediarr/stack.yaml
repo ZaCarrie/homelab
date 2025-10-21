@@ -123,7 +123,6 @@ services:
       - sabnzbd_incomplete_downloads:/incomplete-downloads
       - sabnzbd_downloads:/downloads 
 
-
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     pull_policy: ${pull_policy}
