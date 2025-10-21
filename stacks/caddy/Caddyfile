@@ -99,3 +99,8 @@ qb.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8080
     import cloudflare
 }
+# radarr
+radarr.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:7878
+    import cloudflare
+}
