@@ -95,8 +95,6 @@ services:
       - prowlarr_config:/config
     depends_on:
       flaresolverr:
-        condition: service_healthy
-        restart: true
 
 
 
