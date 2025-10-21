@@ -109,3 +109,8 @@ sonarr.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8989
     import cloudflare
 }
+# notifiarr
+notifiarr.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:5454
+    import cloudflare
+}
