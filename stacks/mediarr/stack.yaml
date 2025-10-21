@@ -25,7 +25,7 @@ volumes:
 #secrets:
 
 services:
-  emby:
+  jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     pull_policy: ${pull_policy}
     container_name: ${jellyfin_container_name}
