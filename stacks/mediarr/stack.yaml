@@ -169,5 +169,33 @@ services:
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
 
+  jellyseerr:
+    image: ghcr.io/fallenbagel/jellyseerr:latest
+    pull_policy: ${pull_policy}
+    container_name: ${jellyseerr_container_name}
+    restart: ${restart}
+    depends_on:
+      - jellyfin
+      - radarr
+      - sonarr
+    init: true
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.40
+    ports:
+      - ${jellyseerr_port_5055}:5055
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=America/Chicago
+      - PORT=5055
+    volumes:
+      - /docker/jellyseerr/config:/config
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+
 
 

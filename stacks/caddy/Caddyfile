@@ -114,3 +114,8 @@ notifiarr.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:5454
     import cloudflare
 }
+# jellyseerr
+jellyseerr.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:5055
+    import cloudflare
+}
