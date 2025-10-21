@@ -21,26 +21,6 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE_MEDIA}/movies"
-  qbittorrent_downloads:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${qbittorrent_container_name}/downloads"
-  sabnzbd_incomplete_downloads:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${sabnzbd_container_name}/incomplete_downloads"
-  sabnzbd_downloads:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${sabnzbd_container_name}/downloads"
-
-
 
 #secrets:
 
@@ -102,7 +82,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /docker/qbittorrent/config:/config
-      - qbittorrent_downloads:/downloads
+      - /docker/downloads/torrent:/downloads
 
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
@@ -120,8 +100,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /docker/sabnzbd/config:/config
-      - sabnzbd_incomplete_downloads:/incomplete-downloads
-      - sabnzbd_downloads:/downloads 
+      - /docker/downloads/usenet/inprogress:/incomplete-downloads
+      - /docker/downloads/usenet/complete:/downloads 
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -162,8 +142,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /docker/radarr/config:/config
+      - /docker/downloads:/downloads
       - media_movies:/movies
-      - qbittorrent_downloads:/downloads
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -183,8 +163,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /docker/sonarr/config:/config
+      - /docker/downloads:/downloads
       - media_tvshows:/tv
-      - qbittorrent_downloads:/downloads
 
   notifiarr:
     image: golift/notifiarr:latest
