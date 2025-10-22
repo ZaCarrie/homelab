@@ -82,7 +82,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /docker/qbittorrent/config:/config
-      - /docker/downloads/torrent:/downloads
+      - /docker/downloads/torrent:/docker/downloads/torrent
 
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
@@ -100,8 +100,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /docker/sabnzbd/config:/config
-      - /docker/downloads/usenet/inprogress:/incomplete-downloads
-      - /docker/downloads/usenet/complete:/downloads 
+      - /docker/downloads/usenet/inprogress:/docker/downloads/usenet/inprogress
+      - /docker/downloads/usenet/complete:/docker/downloads/usenet/complete
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -142,7 +142,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /docker/radarr/config:/config
-      - /docker/downloads:/downloads
+      - /docker/downloads:/docker/downloads
       - media_movies:/movies
 
   sonarr:
@@ -163,7 +163,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /docker/sonarr/config:/config
-      - /docker/downloads:/downloads
+      - /docker/downloads:/docker/downloads
       - media_tvshows:/tv
 
   notifiarr:
