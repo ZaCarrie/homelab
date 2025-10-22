@@ -9,6 +9,12 @@ networks:
         - subnet: 10.20.20.0/24
 
 volumes:
+  qb_downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/downloads/torrent"
   media_tvshows:
     driver: local
     driver_opts:
@@ -88,7 +94,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /docker/qbittorrent/config:/config
-      - /docker/downloads/torrent:/docker/downloads/torrent
+      - qb_downloads:/docker/downloads/torrent
 
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
@@ -149,6 +155,7 @@ services:
     volumes:
       - /docker/radarr/config:/config
       - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
       - media_movies:/movies
 
   sonarr:
@@ -170,6 +177,7 @@ services:
     volumes:
       - /docker/sonarr/config:/config
       - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
       - media_tvshows:/tv
 
   lidarr:
@@ -191,6 +199,7 @@ services:
     volumes:
       - /docker/lidarr/config:/config
       - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
       - media_music:/music
 
   notifiarr:
