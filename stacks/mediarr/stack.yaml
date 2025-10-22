@@ -21,6 +21,12 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE_MEDIA}/movies"
+  media_music:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/music"
 
 #secrets:
 
@@ -165,6 +171,27 @@ services:
       - /docker/sonarr/config:/config
       - /docker/downloads:/docker/downloads
       - media_tvshows:/tv
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    pull_policy: ${pull_policy}
+    container_name: ${lidarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - prowlarr
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.50
+    ports:
+      - ${lidarr_port_8686}:8686
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/lidarr/config:/config
+      - /docker/downloads:/docker/downloads
+      - media_music:/music
 
   notifiarr:
     image: golift/notifiarr:latest

@@ -124,3 +124,8 @@ sabnzbd.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:8081
     import cloudflare
 }
+# lidarr
+lidarr.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:8686
+    import cloudflare
+}
