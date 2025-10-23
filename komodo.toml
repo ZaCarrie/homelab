@@ -34,6 +34,17 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 ##
 
 [[stack]]
+name = "frigate"
+[stack.config]
+server = "Proxmox-Komodo"
+auto_update = true
+auto_update_all_services = true
+linked_repo = "Homelab"
+run_directory = "stacks/frigate"
+
+##
+
+[[stack]]
 name = "mediarr"
 [stack.config]
 server = "Proxmox-Komodo"
@@ -48,17 +59,6 @@ NFS_O=[[NFS_O]]
 PROTON_VPN_PRIVATE_KEY=[[PROTON_VPN_PRIVATE_KEY]]
 PROTON_VPN_ADDRESSES=[[PROTON_VPN_ADDRESSES]]
 """
-
-##
-
-[[stack]]
-name = "frigate"
-[stack.config]
-server = "Proxmox-Komodo"
-auto_update = true
-auto_update_all_services = true
-linked_repo = "Homelab"
-run_directory = "stacks/frigate"
 
 ##
 
@@ -146,19 +146,6 @@ name = "Stage 2"
 enabled = true
 executions = [
   { execution.type = "BatchDeployStackIfChanged", execution.params.pattern = "*", enabled = true }
-]
-
-##
-
-[[procedure]]
-name = "github-sync"
-config.schedule = "1 */1 * * * *"
-
-[[procedure.config.stage]]
-name = "Stage 1"
-enabled = true
-executions = [
-  { execution.type = "RunSync", execution.params.sync = "Github", enabled = true }
 ]
 
 ##
