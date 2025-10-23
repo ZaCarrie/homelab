@@ -1,22 +1,46 @@
 services:
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+  gluetun:
+    image: qmcgaw/gluetun:latest
     pull_policy: ${pull_policy}
-    container_name: ${qbittorrent_container_name}
+    container_name: ${glueton_container_name}
     restart: ${restart}
     networks:
       mediarr:
         ipv4_address: 10.20.20.20
     ports:
-      - ${qbittorrent_port_8080}:8080
-      - ${qbittorrent_port_6881}:6881
-      - ${qbittorrent_port_6881}:6881/udp
+      - ${qbittorrent_port_ui}:${qbittorrent_port_ui}
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
-      - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - VPN_PORT_FORWARDING=on
+      - GLUETUN_HTTP_CONTROL_SERVER_ENABLE=on
+      - WIREGUARD_PRIVATE_KEY=${PROTON_VPN_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${PROTON_VPN_ADDRESSES}
+      - VPN_CITIES=Switzerland
+      - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${qbittorrent_port_ui}/api/v2/app/setPreferences 2>&1'
+    volumes:
+      - /docker/gluetun/config:/glueton
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    pull_policy: ${pull_policy}
+    container_name: ${qbittorrent_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetun
+    network_mode: "service:glueton"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - WEBUI_PORT=${qbittorrent_port_ui}
     volumes:
       - /docker/qbittorrent/config:/config
       - qb_downloads:/docker/downloads/torrent
