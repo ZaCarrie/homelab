@@ -1,0 +1,57 @@
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    pull_policy: ${pull_policy}
+    container_name: ${flaresolverr_container_name}
+    restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.15
+    ports:
+      - ${flaresolverr_port_8191}:8191
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=America/Chicago
+  
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    pull_policy: ${pull_policy}
+    container_name: ${qbittorrent_container_name}
+    restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.20
+    ports:
+      - ${qbittorrent_port_8080}:8080
+      - ${qbittorrent_port_6881}:6881
+      - ${qbittorrent_port_6881}:6881/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /docker/qbittorrent/config:/config
+      - qb_downloads:/docker/downloads/torrent
+
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    pull_policy: ${pull_policy}
+    container_name: ${sabnzbd_container_name}
+    restart: ${restart}
+    networks:
+      mediarr:
+        ipv4_address: 10.20.20.45
+    ports:
+      - ${sabnzbd_port_8080}:8080
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/sabnzbd/config:/config
+      - /docker/downloads/usenet/inprogress:/docker/downloads/usenet/inprogress
+      - /docker/downloads/usenet/complete:/docker/downloads/usenet/complete
