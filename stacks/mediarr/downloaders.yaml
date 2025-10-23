@@ -1,6 +1,6 @@
 services:
   gluetun_downloaders:
-    image: qmcgaw/gluetun:latest
+    image: qmcgaw/gluetun:latest@sha256:791a15decc982d4968d10159227cca26e12083b7e51b00b2c3d0e35163203a69
     pull_policy: ${pull_policy}
     container_name: ${gluetun_downloaders_container_name}
     restart: ${restart}
@@ -30,7 +30,7 @@ services:
       - /dev/net/tun:/dev/net/tun
 
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:latest@sha256:51dd497bd9b1de06fc1f9c9753297fae1e7445ad817e4528ee3f84c9c3122c7d
     pull_policy: ${pull_policy}
     container_name: ${qbittorrent_container_name}
     restart: ${restart}
@@ -47,7 +47,7 @@ services:
       - qb_downloads:/docker/downloads/torrent
 
   sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:latest
+    image: lscr.io/linuxserver/sabnzbd:latest@sha256:3e3678945b3a977ad5da67c29e9516b186a0fcadca22fab44267ddf5c0d1d33b
     pull_policy: ${pull_policy}
     container_name: ${sabnzbd_container_name}
     restart: ${restart}

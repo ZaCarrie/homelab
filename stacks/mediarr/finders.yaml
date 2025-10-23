@@ -1,6 +1,6 @@
 services:
   gluetun_finders:
-    image: qmcgaw/gluetun:latest
+    image: qmcgaw/gluetun:latest@sha256:791a15decc982d4968d10159227cca26e12083b7e51b00b2c3d0e35163203a69
     pull_policy: ${pull_policy}
     container_name: ${gluetun_finders_container_name}
     restart: ${restart}
@@ -34,7 +34,7 @@ services:
       - /dev/net/tun:/dev/net/tun
 
   flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:latest@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
     pull_policy: ${pull_policy}
     container_name: ${flaresolverr_container_name}
     restart: ${restart}
@@ -48,7 +48,7 @@ services:
       - TZ=America/Chicago
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
+    image: lscr.io/linuxserver/prowlarr:latest@sha256:608935c38763920b25622a3d404bb14ea08fcaa7c2a9b1c93ce9bac61ad4b11d
     pull_policy: ${pull_policy}
     container_name: ${prowlarr_container_name}
     restart: ${restart}
@@ -66,7 +66,7 @@ services:
       - /docker/prowlarr/config:/config
 
   jellyseerr:
-    image: ghcr.io/fallenbagel/jellyseerr:latest
+    image: ghcr.io/fallenbagel/jellyseerr:latest@sha256:9cc9e9ee6cd5cf5a23feb45c37742ba34cfd6314d81d259cddb373a97ac92cdd
     pull_policy: ${pull_policy}
     container_name: ${jellyseerr_container_name}
     restart: ${restart}
@@ -91,7 +91,7 @@ services:
       retries: 3
 
   radarr:
-    image: lscr.io/linuxserver/radarr:latest
+    image: lscr.io/linuxserver/radarr:latest@sha256:fae2aafa6ecace3524fc79d102f5bfd25fb151caed6a454cee46479236ac33bf
     pull_policy: ${pull_policy}
     container_name: ${radarr_container_name}
     restart: ${restart}
@@ -110,7 +110,7 @@ services:
       - media_movies:/movies
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
+    image: lscr.io/linuxserver/sonarr:latest@sha256:69d72f525bc181728c8f4788992a28ae1cd797ddd978f48bc2e271c7acd02e9b
     pull_policy: ${pull_policy}
     container_name: ${sonarr_container_name}
     restart: ${restart}
@@ -129,7 +129,7 @@ services:
       - media_tvshows:/tv
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
+    image: lscr.io/linuxserver/lidarr:latest@sha256:5f58fcb45a15cb33ef153f74b14c724ba073553afdc9b078e7701f15b7ce1433
     pull_policy: ${pull_policy}
     container_name: ${lidarr_container_name}
     restart: ${restart}
@@ -148,7 +148,7 @@ services:
       - media_music:/music
 
   notifiarr:
-    image: golift/notifiarr:latest
+    image: golift/notifiarr:latest@sha256:750a8f84ce1f8b19d296a0e954700cd55f9d557560ac37713b34c0a29b75f6bf
     pull_policy: ${pull_policy}
     container_name: ${notifiarr_container_name}
     restart: ${restart}
