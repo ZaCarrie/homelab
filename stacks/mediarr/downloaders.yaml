@@ -2,7 +2,7 @@ services:
   gluetun:
     image: qmcgaw/gluetun:latest
     pull_policy: ${pull_policy}
-    container_name: ${glueton_container_name}
+    container_name: ${gluetun_container_name}
     restart: ${restart}
     networks:
       mediarr:
