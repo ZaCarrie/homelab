@@ -96,7 +96,7 @@ prowlarr.{$BASE_DOMAIN} {
 }
 # qbittorrent
 qb.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8080
+    reverse_proxy {$DOCKER_LXC_IP}:8081
     import cloudflare
 }
 # radarr
@@ -121,7 +121,7 @@ jellyseerr.{$BASE_DOMAIN} {
 }
 # sabnzbd
 sabnzbd.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8081
+    reverse_proxy {$DOCKER_LXC_IP}:8080
     import cloudflare
 }
 # lidarr
