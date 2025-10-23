@@ -9,6 +9,7 @@ services:
         ipv4_address: 10.20.20.20
     ports:
       - ${qbittorrent_port_ui}:${qbittorrent_port_ui}
+      - ${sabnzbd_port_ui}:${sabnzbd_port_ui}
     environment:
       - PUID=1000
       - PGID=1000
@@ -50,11 +51,9 @@ services:
     pull_policy: ${pull_policy}
     container_name: ${sabnzbd_container_name}
     restart: ${restart}
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.45
-    ports:
-      - ${sabnzbd_port_8080}:8080
+    depends_on:
+      - gluetun
+    network_mode: "service:gluetun"
     environment:
       - PUID=1000
       - PGID=1000
