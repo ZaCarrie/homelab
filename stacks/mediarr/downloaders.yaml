@@ -1,20 +1,4 @@
 services:
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    pull_policy: ${pull_policy}
-    container_name: ${flaresolverr_container_name}
-    restart: ${restart}
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.15
-    ports:
-      - ${flaresolverr_port_8191}:8191
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=America/Chicago
-  
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     pull_policy: ${pull_policy}
