@@ -1,6 +1,7 @@
 ---
 include:
   - downloaders.yaml
+  - finders.yaml
 
 networks:
   mediarr:
