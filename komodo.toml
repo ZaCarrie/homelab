@@ -131,7 +131,6 @@ repo = "ZaCarrie/homelab"
 
 [[procedure]]
 name = "pull repo then redeploy changes"
-config.schedule = "1 */5 * * * *"
 config.schedule_format = "Cron"
 
 [[procedure.config.stage]]
