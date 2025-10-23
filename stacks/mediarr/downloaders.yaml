@@ -22,7 +22,7 @@ services:
       - VPN_CITIES=Switzerland
       - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${qbittorrent_port_ui}/api/v2/app/setPreferences 2>&1'
     volumes:
-      - /docker/gluetun/config:/glueton
+      - /docker/gluetun/config:/gluetun
     cap_add:
       - NET_ADMIN
     devices:
@@ -35,7 +35,7 @@ services:
     restart: ${restart}
     depends_on:
       - gluetun
-    network_mode: "service:glueton"
+    network_mode: "service:gluetun"
     environment:
       - PUID=1000
       - PGID=1000
