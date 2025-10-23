@@ -1,14 +1,46 @@
 services:
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+  gluetun_finders:
+    image: qmcgaw/gluetun:latest
     pull_policy: ${pull_policy}
-    container_name: ${flaresolverr_container_name}
+    container_name: ${gluetun_finders_container_name}
     restart: ${restart}
     networks:
       mediarr:
         ipv4_address: 10.20.20.15
     ports:
-      - ${flaresolverr_port_8191}:8191
+      - ${flaresolverr_port}:${flaresolverr_port}
+      - ${prowlarr_port_ui}:${prowlarr_port_ui}
+      - ${jellyseerr_port_ui}:${jellyseerr_port_ui}
+      - ${radarr_port_ui}:${radarr_port_ui}
+      - ${sonarr_port_ui}:${sonarr_port_ui}
+      - ${lidarr_port_ui}:${lidarr_port_ui}
+      - ${notifiarr_port_ui}:${notifiarr_port_ui}
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - VPN_PORT_FORWARDING=on
+      - GLUETUN_HTTP_CONTROL_SERVER_ENABLE=on
+      - WIREGUARD_PRIVATE_KEY=${MEDIARR_WG_PRIVATE_KEY_FINDERS}
+      - WIREGUARD_ADDRESSES=${MEDIARR_WG_ADDRESSES}
+      - SERVER_COUNTRIES=United States
+    volumes:
+      - /docker/${gluetun_finders_container_name}/config:/gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    pull_policy: ${pull_policy}
+    container_name: ${flaresolverr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetun_downloaders
+    network_mode: "service:gluetun_finders"
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
@@ -21,14 +53,11 @@ services:
     container_name: ${prowlarr_container_name}
     restart: ${restart}
     depends_on:
+      - gluetun_finders
       - flaresolverr
       - qbittorrent
       - sabnzbd
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.10
-    ports:
-      - ${prowlarr_port_9696}:9696
+    network_mode: "service:gluetun_finders"
     environment:
       - PUID=1000
       - PGID=1000
@@ -42,15 +71,12 @@ services:
     container_name: ${jellyseerr_container_name}
     restart: ${restart}
     depends_on:
+      - gluetun_finders
       - jellyfin
       - radarr
       - sonarr
     init: true
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.40
-    ports:
-      - ${jellyseerr_port_5055}:5055
+    network_mode: "service:gluetun_finders"
     environment:
       - LOG_LEVEL=debug
       - TZ=America/Chicago
@@ -70,12 +96,9 @@ services:
     container_name: ${radarr_container_name}
     restart: ${restart}
     depends_on:
+      - gluetun_finders
       - prowlarr
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.25
-    ports:
-      - ${radarr_port_7878}:7878
+    network_mode: "service:gluetun_finders"
     environment:
       - PUID=1000
       - PGID=1000
@@ -92,12 +115,9 @@ services:
     container_name: ${sonarr_container_name}
     restart: ${restart}
     depends_on:
+      - gluetun_finders
       - prowlarr
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.30
-    ports:
-      - ${sonarr_port_8989}:8989
+    network_mode: "service:gluetun_finders"
     environment:
       - PUID=1000
       - PGID=1000
@@ -114,12 +134,9 @@ services:
     container_name: ${lidarr_container_name}
     restart: ${restart}
     depends_on:
+      - gluetun_finders
       - prowlarr
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.50
-    ports:
-      - ${lidarr_port_8686}:8686
+    network_mode: "service:gluetun_finders"
     environment:
       - PUID=1000
       - PGID=1000
@@ -135,11 +152,9 @@ services:
     pull_policy: ${pull_policy}
     container_name: ${notifiarr_container_name}
     restart: ${restart}
-    networks:
-      mediarr:
-        ipv4_address: 10.20.20.35
-    ports:
-      - ${notifiarr_port_5454}:5454
+    depends_on:
+      - gluetun_finders
+    network_mode: "service:gluetun_finders"
     volumes:
       - /docker/notifiarr/config:/config
       - /var/run/utmp:/var/run/utmp
