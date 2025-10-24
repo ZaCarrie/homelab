@@ -59,6 +59,6 @@ services:
       - beets_config:/config
       # for music folders, match paths inside and out of container!
       - beets_input:/music/inbox_auto
-      - navidrome_music:/music/imported
+      #- navidrome_music:/music/imported
 
 
