@@ -73,6 +73,7 @@ linked_repo = "Homelab"
 run_directory = "stacks/navidrome"
 environment = """
 NFS_DEVICE=[[NFS_DEVICE]]
+NFS_DEVICE_MEDIA=[[NFS_DEVICE_MEDIA]]
 NFS_O=[[NFS_O]]
 """
 
