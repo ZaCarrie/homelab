@@ -8,12 +8,6 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${navidrome_container_name}/data"
-  navidrome_music:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${navidrome_container_name}/music"
   beets_config:
     driver: local
     driver_opts:
@@ -26,6 +20,12 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE}/${beets_container_name}/input"
+  media_music:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/music"
 
 #secrets:
 
@@ -42,7 +42,7 @@ services:
       - ND_SCANNER_PURGEMISSING=full
     volumes:
       - navidrome_data:/data
-      - navidrome_music:/music:ro
+      - media_music:/music:ro
   
   beets-flask:
     image: pspitzner/beets-flask:stable@sha256:0e707cbbcf563754acd0e67a435f67ed298e68e1ff910d484b67eceea9094b1b
