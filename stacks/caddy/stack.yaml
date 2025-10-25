@@ -1,6 +1,7 @@
 ---
 networks:
   caddy:
+    name: caddy-network
 
 #volumes:
 volumes:
