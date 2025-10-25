@@ -1,5 +1,6 @@
 ---
-#networks:
+networks:
+  caddy:
 
 volumes:
   open-webui:
@@ -11,6 +12,8 @@ services:
     pull_policy: ${pull_policy}
     container_name: ${openwebui_container_name}
     restart: ${restart}
+    networks:
+      - caddy
     ports:
       - "${openwebui_port_8080}:8080"
     environment: 
