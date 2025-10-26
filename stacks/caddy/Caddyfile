@@ -7,6 +7,19 @@
         resolvers 1.1.1.1
     }
 }
+#------------------------------------------------
+# caddy network
+#------------------------------------------------
+openwebui.{$BASE_DOMAIN} {
+    reverse_proxy openwebui:8080
+    import cloudflare
+}
+# navidrome
+navidrome.{$BASE_DOMAIN} {
+    reverse_proxy navidrome:4533
+    import cloudflare
+}
+
 
 #------------------------------------------------
 # external to docker lxc
@@ -34,10 +47,6 @@ ha.{$BASE_DOMAIN} {
     reverse_proxy 10.10.10.234:8123
     import cloudflare
 }
-openwebui.{$BASE_DOMAIN} {
-    reverse_proxy openwebui:8080
-    import cloudflare
-}
 ollama.{$BASE_DOMAIN} {
     reverse_proxy 192.168.1.150:11434
     import cloudflare
@@ -59,15 +68,6 @@ https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
 # komodo gui
 komodo.{$BASE_DOMAIN} {
     reverse_proxy {$DOCKER_LXC_IP}:9120
-    import cloudflare
-}
-# navidrome
-navidrome.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:4533
-    import cloudflare
-}
-beets.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:9999
     import cloudflare
 }
 # wg dashboard
