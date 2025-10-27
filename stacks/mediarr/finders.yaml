@@ -39,7 +39,7 @@ services:
     container_name: ${flaresolverr_container_name}
     restart: ${restart}
     depends_on:
-      - gluetun_downloaders
+      - gluetun_finders
     network_mode: "service:gluetun_finders"
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
