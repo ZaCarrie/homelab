@@ -1,11 +1,10 @@
 ---
 include:
+  - ../components/caddy_network.yaml
   - downloaders.yaml
   - finders.yaml
 
-networks:
-  caddy:
-    name: caddy-network
+#networks:
 
 volumes:
   qb_downloads:

@@ -1,0 +1,7 @@
+networks:
+  caddy:
+    name: caddy_network
+    driver: bridge
+    config:
+        - ip_range: 30.30.30.0/24
+

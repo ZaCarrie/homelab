@@ -1,7 +1,8 @@
 ---
-networks:
-  caddy:
-    name: caddy-network
+include:
+  - ../components/caddy_network.yaml
+
+#networks:
 
 #volumes:
 volumes:
