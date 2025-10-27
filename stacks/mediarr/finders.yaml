@@ -6,7 +6,7 @@ services:
     restart: ${restart}
     networks:
       caddy:
-        ipv4_address: 30.30.30.10
+        ipv4_address: 30.30.30.100
     ports:
       - ${flaresolverr_port}:${flaresolverr_port}
       - ${prowlarr_port_ui}:${prowlarr_port_ui}
