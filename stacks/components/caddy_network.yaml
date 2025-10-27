@@ -2,6 +2,8 @@ networks:
   caddy:
     name: caddy_network
     driver: bridge
-    config:
+    ipam:
+      driver: default
+      config:
         - ip_range: 30.30.30.0/24
 
