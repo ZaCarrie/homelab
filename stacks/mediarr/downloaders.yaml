@@ -5,8 +5,7 @@ services:
     container_name: ${gluetun_downloaders_container_name}
     restart: ${restart}
     networks:
-      mediarr:
-        ipv4_address: 10.20.20.20
+      - caddy
     ports:
       - ${qbittorrent_port_ui}:${qbittorrent_port_ui}
       - ${sabnzbd_port_ui}:${sabnzbd_port_ui}

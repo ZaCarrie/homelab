@@ -4,13 +4,8 @@ include:
   - finders.yaml
 
 networks:
-  mediarr:
-    driver: bridge
-    enable_ipv6: false
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.20.20.0/24
+  caddy:
+    name: caddy-network
 
 volumes:
   qb_downloads:
@@ -47,8 +42,7 @@ services:
     container_name: ${jellyfin_container_name}
     restart: ${restart}
     networks:
-      mediarr:
-        ipv4_address: 10.20.20.5
+      - caddy
     ports:
       - ${jellyfin_port_8096}:8096
     environment: 
@@ -61,3 +55,19 @@ services:
       - media_movies:/data/movies
     devices:
       - /dev/dri:/dev/dri
+
+  navidrome:
+    image: deluan/navidrome:latest@sha256:2ae037d464de9f802d047165a13b1c9dc2bdbb14920a317ae4aef1233adc0a3c
+    user: 1000:1000
+    pull_policy: ${pull_policy}
+    container_name: ${navidrome_container_name}
+    restart: ${restart}
+    networks:
+      - caddy
+    ports:
+      - "${navidrome_port_4533}:4533"
+    environment:
+      - ND_SCANNER_PURGEMISSING=full
+    volumes:
+      - /docker/${navidrome_container_name}/data:/data
+      - media_music:/music:ro

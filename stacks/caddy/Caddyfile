@@ -7,6 +7,7 @@
         resolvers 1.1.1.1
     }
 }
+
 #------------------------------------------------
 # caddy network
 #------------------------------------------------
@@ -19,7 +20,70 @@ navidrome.{$BASE_DOMAIN} {
     reverse_proxy navidrome:4533
     import cloudflare
 }
+# jellyfin
+jellyfin.{$BASE_DOMAIN} {
+    reverse_proxy jellyfin:8096
+    import cloudflare
+}
+# qbittorrent
+qb.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_downloaders:8081
+    import cloudflare
+}
+# sabnzbd
+sabnzbd.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_downloaders:8080
+    import cloudflare
+}
+# prowlarr
+prowlarr.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_finders:9696
+    import cloudflare
+}
+# radarr
+radarr.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_finders:7878
+    import cloudflare
+}
+# sonarr
+sonarr.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_finders:8989
+    import cloudflare
+}
+# notifiarr
+notifiarr.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_finders:5454
+    import cloudflare
+}
+# jellyseerr
+jellyseerr.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_finders:5055
+    import cloudflare
+}
+# lidarr
+lidarr.{$BASE_DOMAIN} {
+    reverse_proxy gluetun_finders:8686
+    import cloudflare
+}
 
+#------------------------------------------------
+# main komodo server
+#------------------------------------------------
+# komodo gui
+komodo.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:9120
+    import cloudflare
+}
+# wg dashboard
+wg.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:51821
+    import cloudflare
+}
+# frigate
+frigate.{$BASE_DOMAIN} {
+    reverse_proxy {$DOCKER_LXC_IP}:5000
+    import cloudflare
+}
 
 #------------------------------------------------
 # external to docker lxc
@@ -58,74 +122,5 @@ ollama.{$BASE_DOMAIN} {
 # nextcloud
 https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     reverse_proxy 10.10.10.12:11000
-    import cloudflare
-}
-
-
-#------------------------------------------------
-# main komodo server
-#------------------------------------------------
-# komodo gui
-komodo.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:9120
-    import cloudflare
-}
-# wg dashboard
-wg.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:51821
-    import cloudflare
-}
-# frigate
-frigate.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:5000
-    import cloudflare
-}
-
-#------------------------------------------------
-# mediarr stack
-#------------------------------------------------
-# jellyfin
-jellyfin.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8096
-    import cloudflare
-}
-# prowlarr
-prowlarr.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:9696
-    import cloudflare
-}
-# qbittorrent
-qb.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8081
-    import cloudflare
-}
-# radarr
-radarr.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:7878
-    import cloudflare
-}
-# sonarr
-sonarr.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8989
-    import cloudflare
-}
-# notifiarr
-notifiarr.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:5454
-    import cloudflare
-}
-# jellyseerr
-jellyseerr.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:5055
-    import cloudflare
-}
-# sabnzbd
-sabnzbd.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8080
-    import cloudflare
-}
-# lidarr
-lidarr.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:8686
     import cloudflare
 }
