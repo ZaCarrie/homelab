@@ -41,7 +41,8 @@ services:
     container_name: ${homarr_container_name}
     restart: ${restart}
     networks:
-      - caddy
+      caddy:
+        ipv4_address: 30.30.30.5
     ports:
       - ${homarr_port_7575}:7575
     environment:
@@ -55,7 +56,8 @@ services:
     container_name: ${jellyfin_container_name}
     restart: ${restart}
     networks:
-      - caddy
+      caddy:
+        ipv4_address: 30.30.30.10
     ports:
       - ${jellyfin_port_8096}:8096
     environment: 
@@ -76,7 +78,8 @@ services:
     container_name: ${navidrome_container_name}
     restart: ${restart}
     networks:
-      - caddy
+      caddy:
+        ipv4_address: 30.30.30.15
     ports:
       - "${navidrome_port_4533}:4533"
     environment:

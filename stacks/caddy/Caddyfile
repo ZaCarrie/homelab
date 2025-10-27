@@ -37,7 +37,7 @@ qb.{$BASE_DOMAIN} {
 }
 # sabnzbd
 sabnzbd.{$BASE_DOMAIN} {
-    reverse_proxy 30.30.30.200:8080
+    reverse_proxy sabnzbd:8080
     import cloudflare
 }
 # prowlarr
