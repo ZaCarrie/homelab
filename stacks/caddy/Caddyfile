@@ -15,6 +15,11 @@ openwebui.{$BASE_DOMAIN} {
     reverse_proxy openwebui:8080
     import cloudflare
 }
+# homarr
+homarr.{$BASE_DOMAIN} {
+    reverse_proxy homarr:7575
+    import cloudflare
+}
 # navidrome
 navidrome.{$BASE_DOMAIN} {
     reverse_proxy navidrome:4533
