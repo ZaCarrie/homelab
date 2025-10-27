@@ -44,6 +44,8 @@ services:
       - caddy
     ports:
       - ${homarr_port_7575}:7575
+    environment:
+      - SECRET_ENCRYPTION_KEY=8aaca723973dd7ea0495d56dc5000eeda8d194f51de7611571dbfab032e39c82
     volumes:
       - /docker/${homarr_container_name}/appdata:/appdata
 
