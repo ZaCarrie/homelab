@@ -5,5 +5,5 @@ networks:
     ipam:
       driver: default
       config:
-        - ip_range: 30.30.30.0/24
+        - subnet: 30.30.30.0/24
 
