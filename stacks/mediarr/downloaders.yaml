@@ -47,7 +47,7 @@ services:
       - qb_downloads:/docker/downloads/torrent
 
   sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:latest@sha256:37fc318dc632106eac00f096661f43ca513793bf51913bcbd989ba921b3409c8
+    image: lscr.io/linuxserver/sabnzbd:latest@sha256:6e6e7abf7a87436ffccd7df41e64a28df9c530e2be5467339a3f5f0518922b49
     pull_policy: ${pull_policy}
     container_name: ${sabnzbd_container_name}
     restart: ${restart}
