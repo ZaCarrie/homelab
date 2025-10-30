@@ -129,7 +129,7 @@ services:
       - media_tvshows:/tv
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest@sha256:5e1235d00b5d1c1f60ca0d472e554a6611aef41aa7b5b6d88260214bf4809af0
+    image: lscr.io/linuxserver/lidarr:latest@sha256:1d49ebdfaae525d9e1e4ad5b7fa1753e364da44ac1b5e6acae241a2173ac09a4
     pull_policy: ${pull_policy}
     container_name: ${lidarr_container_name}
     restart: ${restart}
