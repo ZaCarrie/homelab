@@ -64,22 +64,6 @@ MEDIARR_WG_ADDRESSES=[[MEDIARR_WG_ADDRESSES]]
 ##
 
 [[stack]]
-name = "navidrome"
-[stack.config]
-server = "Proxmox-Komodo"
-auto_update = true
-auto_update_all_services = true
-linked_repo = "Homelab"
-run_directory = "stacks/navidrome"
-environment = """
-NFS_DEVICE=[[NFS_DEVICE]]
-NFS_DEVICE_MEDIA=[[NFS_DEVICE_MEDIA]]
-NFS_O=[[NFS_O]]
-"""
-
-##
-
-[[stack]]
 name = "nextcloud"
 [stack.config]
 server = "Nextcloud"
@@ -147,6 +131,46 @@ name = "Stage 2"
 enabled = true
 executions = [
   { execution.type = "BatchDeployStackIfChanged", execution.params.pattern = "*", enabled = true }
+]
+
+##
+
+[[procedure]]
+name = "redeploy mediarr"
+
+[[procedure.config.stage]]
+name = "Stage 1"
+enabled = true
+executions = [
+  { execution.type = "PullRepo", execution.params.repo = "Homelab", enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Stage 2"
+enabled = true
+executions = [
+  { execution.type = "DestroyStack", execution.params.stack = "caddy", execution.params.services = [], execution.params.remove_orphans = false, enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Stage 3"
+enabled = true
+executions = [
+  { execution.type = "DeployStack", execution.params.stack = "caddy", execution.params.services = [], enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Stage 4"
+enabled = true
+executions = [
+  { execution.type = "DestroyStack", execution.params.stack = "mediarr", execution.params.services = [], execution.params.remove_orphans = false, enabled = true }
+]
+
+[[procedure.config.stage]]
+name = "Stage 5"
+enabled = true
+executions = [
+  { execution.type = "DeployStack", execution.params.stack = "mediarr", execution.params.services = [], enabled = true }
 ]
 
 ##
