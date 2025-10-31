@@ -145,7 +145,6 @@ services:
     restart: ${restart}
     depends_on:
       - gluetunmediarr
-      - jellyfin
       - radarr
       - sonarr
     init: true
