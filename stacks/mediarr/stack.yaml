@@ -29,6 +29,12 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE_MEDIA}/music"
+  media_anime:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/anime"
 
 #secrets:
 
@@ -51,6 +57,7 @@ services:
       - ${sonarr_port_ui}:${sonarr_port_ui}
       - ${lidarr_port_ui}:${lidarr_port_ui}
       - ${notifiarr_port_ui}:${notifiarr_port_ui}
+      - ${sonarr_port_ui}:${sonarr_port_ui}
     environment:
       - PUID=1000
       - PGID=1000
@@ -195,11 +202,32 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
+      - SONARR__SERVER__PORT=${sonarr_port_ui}
     volumes:
       - /docker/sonarr/config:/config
       - /docker/downloads:/docker/downloads
       - qb_downloads:/docker/downloads/torrent
       - media_tvshows:/tv
+
+  sonarr2:
+    image: lscr.io/linuxserver/sonarr:latest@sha256:fbe67c25693dc5f3de220c5691f374576ae265df782c16918cc071b630490bd7
+    pull_policy: ${pull_policy}
+    container_name: ${sonarr2_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - prowlarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - SONARR__SERVER__PORT=${sonarr2_port_ui}
+    volumes:
+      - /docker/sonarr2/config:/config
+      - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
+      - media_anime:/anime
 
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest@sha256:1d49ebdfaae525d9e1e4ad5b7fa1753e364da44ac1b5e6acae241a2173ac09a4

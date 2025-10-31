@@ -55,6 +55,11 @@ sonarr.{$BASE_DOMAIN} {
     reverse_proxy gluetunmediarr:8989
     import cloudflare
 }
+# sonarr2
+sonarr2.{$BASE_DOMAIN} {
+    reverse_proxy gluetunmediarr:8990
+    import cloudflare
+}
 # notifiarr
 notifiarr.{$BASE_DOMAIN} {
     reverse_proxy gluetunmediarr:5454
