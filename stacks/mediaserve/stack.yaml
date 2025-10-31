@@ -66,6 +66,7 @@ services:
       - /docker/jellyfin/config:/config
       - media_tvshows:/data/tvshows
       - media_movies:/data/movies
+      - media_anime:/data/anime
     devices:
       - /dev/dri:/dev/dri
 
