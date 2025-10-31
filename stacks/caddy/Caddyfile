@@ -32,42 +32,42 @@ jellyfin.{$BASE_DOMAIN} {
 }
 # qbittorrent
 qb.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_downloaders:8081
+    reverse_proxy gluetunmediarr:8081
     import cloudflare
 }
 # sabnzbd
 sabnzbd.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_downloaders:8080
+    reverse_proxy gluetunmediarr:8080
     import cloudflare
 }
 # prowlarr
 prowlarr.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_finders:9696
+    reverse_proxy gluetunmediarr:9696
     import cloudflare
 }
 # radarr
 radarr.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_finders:7878
+    reverse_proxy gluetunmediarr:7878
     import cloudflare
 }
 # sonarr
 sonarr.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_finders:8989
+    reverse_proxy gluetunmediarr:8989
     import cloudflare
 }
 # notifiarr
 notifiarr.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_finders:5454
+    reverse_proxy gluetunmediarr:5454
     import cloudflare
 }
 # jellyseerr
 jellyseerr.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_finders:5055
+    reverse_proxy gluetunmediarr:5055
     import cloudflare
 }
 # lidarr
 lidarr.{$BASE_DOMAIN} {
-    reverse_proxy gluetun_finders:8686
+    reverse_proxy gluetunmediarr:8686
     import cloudflare
 }
 
