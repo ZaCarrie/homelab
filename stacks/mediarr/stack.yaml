@@ -55,15 +55,16 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
-      - VPN_SERVICE_PROVIDER=custom
+      - VPN_SERVICE_PROVIDER=protonvpn
       - VPN_TYPE=wireguard
       - VPN_PORT_FORWARDING=on
       - GLUETUN_HTTP_CONTROL_SERVER_ENABLE=on
-      - WIREGUARD_ENDPOINT_IP=${MEDIARR_WG_ENDPOINT_IP}
-      - WIREGUARD_ENDPOINT_PORT=${MEDIARR_WG_ENDPOINT_PORT}
-      - WIREGUARD_PUBLIC_KEY=${MEDIARR_WG_PUBLIC_KEY}
+      #- WIREGUARD_ENDPOINT_IP=${MEDIARR_WG_ENDPOINT_IP}
+      #- WIREGUARD_ENDPOINT_PORT=${MEDIARR_WG_ENDPOINT_PORT}
+      #- WIREGUARD_PUBLIC_KEY=${MEDIARR_WG_PUBLIC_KEY}
       - WIREGUARD_PRIVATE_KEY=${MEDIARR_WG_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=${MEDIARR_WG_ADDRESSES}
+      - SERVER_COUNTRIES=Switzerland
       - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${qbittorrent_port_ui}/api/v2/app/setPreferences 2>&1'
     volumes:
       - /docker/${gluetunmediarr_container_name}/config:/gluetun
