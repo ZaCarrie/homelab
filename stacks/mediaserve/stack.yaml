@@ -23,6 +23,12 @@ volumes:
       type: nfs
       o: ${NFS_O}
       device: ":${NFS_DEVICE_MEDIA}/music"
+  media_anime:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/anime"
 
 #secrets:
 
