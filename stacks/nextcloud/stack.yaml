@@ -29,7 +29,7 @@ volumes: # If you want to store the data on a different drive, see https://githu
 
 services:
   nextcloud-aio-mastercontainer:
-    image: ghcr.io/nextcloud-releases/all-in-one:latest@sha256:099d024fd92fcea2027b945177902cb7af42da55a38b0eac929192c9a80cec6e
+    image: ghcr.io/nextcloud-releases/all-in-one:latest@sha256:090f59bbef2c6753b2ac58163d3bece84b15af19d9d83d02c33da83080cb6400
     init: true
     pull_policy: ${pull_policy}
     container_name: ${nextcloud_container_name}
