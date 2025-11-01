@@ -135,7 +135,7 @@ https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
     import cloudflare
 }
 # jellyfin pub
-https://jellyfin.{$CADDY_NEXTCLOUD_DOMAIN}:443 {
+jellyfin.{$CADDY_NEXTCLOUD_DOMAIN} {
     reverse_proxy jellyfin:8096
     import cloudflare
 }
