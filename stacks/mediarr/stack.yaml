@@ -73,6 +73,14 @@ services:
       - WIREGUARD_ADDRESSES=${MEDIARR_WG_ADDRESSES}
       - SERVER_HOSTNAMES=${MEDIARR_WG_SERVER_HOSTNAME}
       - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${qbittorrent_port_ui}/api/v2/app/setPreferences 2>&1'
+      - DOT=on
+      - DOT_PROVIDERS=cloudflare,google,quad9
+      - DOT_CACHING=on
+      - BLOCK_MALICIOUS=off
+      - BLOCK_ADS=off
+      - BLOCK_SURVEILLANCE=off
+      - DNS_KEEP_NAMESERVER=off
+      - DNS_ADDRESS=127.0.0.1
     volumes:
       - /docker/${gluetunmediarr_container_name}/config:/gluetun
     cap_add:
