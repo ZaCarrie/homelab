@@ -22,6 +22,7 @@ auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
 run_directory = "stacks/caddy"
+additional_env_files = ["../global-interp.env"]
 environment = """
 CADDY_BASE_DOMAIN=[[CADDY_BASE_DOMAIN]]
 CADDY_BASE_DOMAIN2=[[CADDY_BASE_DOMAIN2]]
