@@ -1,10 +1,9 @@
 ---
-networks:
-  caddy:
-    name: caddy-network
+include:
+  - ../components/caddy_network.yaml
 
-volumes:
-  open-webui:
+#volumes:
+
 #secrets:
 
 services:
