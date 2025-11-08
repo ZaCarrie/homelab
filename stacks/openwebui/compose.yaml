@@ -20,6 +20,4 @@ services:
     environment: 
       - 'OLLAMA_BASE_URL=https://ollama.zacarrie.com'
     volumes:
-      - open-webui:/app/backend/data
-
-
+      - /docker/openwebui/data:/app/backend/data
