@@ -116,6 +116,7 @@ auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
 run_directory = "stacks/easy-wireguard"
+additional_env_files = ["../global-interp.env"]
 environment = """
 NFS_DEVICE=[[NFS_DEVICE]]
 NFS_O=[[NFS_O]]
