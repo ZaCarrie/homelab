@@ -1,5 +1,25 @@
-include:
-  - path: stack.yaml
-    env_file:
-       - ../global-interp.env
-       - ./local-interp.env
+---
+networks:
+  caddy:
+    name: caddy-network
+
+volumes:
+  open-webui:
+#secrets:
+
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:latest@sha256:d6ab9bce3030f5b58e59144a7db9fe3012b39c94d27bc2979e98e6d6dc2161da #https://github.com/open-webui/open-webui/pkgs/container/open-webui/526750706?tag=latest
+    pull_policy: ${pull_policy}
+    container_name: ${openwebui_container_name}
+    restart: ${restart}
+    networks:
+      - caddy
+    ports:
+      - "${openwebui_port_8080}:8080"
+    environment: 
+      - 'OLLAMA_BASE_URL=https://ollama.zacarrie.com'
+    volumes:
+      - open-webui:/app/backend/data
+
+
