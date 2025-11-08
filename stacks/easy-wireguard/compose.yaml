@@ -11,13 +11,7 @@ networks:
         - subnet: 10.42.42.0/24
         - subnet: fdcc:ad94:bacf:61a3::/64
 
-volumes:
-  etc_wireguard:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: ${NFS_O}
-      device: ":${NFS_DEVICE}/${wireguard_container_name}"
+#volumes:
 
 #secrets:
 
