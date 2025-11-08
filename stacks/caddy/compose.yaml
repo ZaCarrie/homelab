@@ -1,5 +1,34 @@
+---
 include:
-  - path: stack.yaml
-    env_file:
-       - ../global-interp.env
-       - ./local-interp.env
+  - ../components/caddy_network.yaml
+
+#networks:
+
+#volumes:
+
+#secrets:
+
+services:
+  caddy:
+    image: ghcr.io/caddybuilds/caddy-cloudflare@sha256:4a3d4afed443f026040cad84b48ef2eef6cc6eb5a80a3ecab66a03df469a46f8
+    pull_policy: ${pull_policy}
+    container_name: ${caddy_container_name}
+    restart: ${restart}
+    networks:
+      - caddy
+    ports:
+      - "${caddy_port_80}:80"
+      - "${caddy_port_443}:443"
+      - "${caddy_port_443}:443/udp"
+    environment:    
+      - TZ=${timezone}
+      - BASE_DOMAIN=${CADDY_BASE_DOMAIN}
+      - BASE_DOMAIN2=${CADDY_BASE_DOMAIN2}
+      - CLOUDFLARE_API_TOKEN=${CADDY_CLOUDFLARE_API}
+      - CADDY_NEXTCLOUD_DOMAIN=${CADDY_NEXTCLOUD_DOMAIN}
+      - DOCKER_LXC_IP=${docker_lxc_ip}     
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
+      - /docker/caddy/data:/data
+      - /docker/caddy/config:/config
+
