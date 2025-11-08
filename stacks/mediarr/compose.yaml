@@ -1,5 +1,270 @@
+---
 include:
-  - path: stack.yaml
-    env_file:
-       - ../global-interp.env
-       - ./local-interp.env
+  - ../components/caddy_network.yaml
+
+#networks:
+
+volumes:
+  qb_downloads:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE}/downloads/torrent"
+  media_tvshows:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/tvshows"
+  media_movies:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/movies"
+  media_music:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/music"
+  media_anime:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: ${NFS_O}
+      device: ":${NFS_DEVICE_MEDIA}/anime"
+
+#secrets:
+
+services:
+  gluetunmediarr:
+    image: qmcgaw/gluetun:latest@sha256:a911b2e5b00995f7b50c8feb9bc3a12ebc7946b7ec7dfd374b44f3ceda9e1d85
+    pull_policy: ${pull_policy}
+    container_name: ${gluetunmediarr_container_name}
+    restart: ${restart}
+    networks:
+      caddy:
+        ipv4_address: 30.30.30.200
+    ports:
+      - ${qbittorrent_port_ui}:${qbittorrent_port_ui}
+      - ${sabnzbd_port_ui}:${sabnzbd_port_ui}
+      - ${flaresolverr_port}:${flaresolverr_port}
+      - ${prowlarr_port_ui}:${prowlarr_port_ui}
+      - ${jellyseerr_port_ui}:${jellyseerr_port_ui}
+      - ${radarr_port_ui}:${radarr_port_ui}
+      - ${sonarr_port_ui}:${sonarr_port_ui}
+      - ${lidarr_port_ui}:${lidarr_port_ui}
+      - ${notifiarr_port_ui}:${notifiarr_port_ui}
+      - ${sonarr_port_ui}:${sonarr_port_ui}
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - VPN_PORT_FORWARDING=on
+      - GLUETUN_HTTP_CONTROL_SERVER_ENABLE=on
+      #- WIREGUARD_ENDPOINT_IP=${MEDIARR_WG_ENDPOINT_IP}
+      #- WIREGUARD_ENDPOINT_PORT=${MEDIARR_WG_ENDPOINT_PORT}
+      #- WIREGUARD_PUBLIC_KEY=${MEDIARR_WG_PUBLIC_KEY}
+      - WIREGUARD_PRIVATE_KEY=${MEDIARR_WG_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${MEDIARR_WG_ADDRESSES}
+      - SERVER_HOSTNAMES=${MEDIARR_WG_SERVER_HOSTNAME}
+      - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${qbittorrent_port_ui}/api/v2/app/setPreferences 2>&1'
+      - DOT=on
+      - DOT_PROVIDERS=cloudflare,google,quad9
+      - DOT_CACHING=on
+      - BLOCK_MALICIOUS=off
+      - BLOCK_ADS=off
+      - BLOCK_SURVEILLANCE=off
+      - DNS_KEEP_NAMESERVER=off
+      - DNS_ADDRESS=127.0.0.1
+    volumes:
+      - /docker/${gluetunmediarr_container_name}/config:/gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest@sha256:098d4340c0709a9ddbc7010ca21900238388454e20182d52b9723b40a2a44293
+    pull_policy: ${pull_policy}
+    container_name: ${qbittorrent_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - WEBUI_PORT=${qbittorrent_port_ui}
+    volumes:
+      - /docker/qbittorrent/config:/config
+      - qb_downloads:/docker/downloads/torrent
+
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest@sha256:6e6e7abf7a87436ffccd7df41e64a28df9c530e2be5467339a3f5f0518922b49
+    pull_policy: ${pull_policy}
+    container_name: ${sabnzbd_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/sabnzbd/config:/config
+      - /docker/downloads/usenet/inprogress:/docker/downloads/usenet/inprogress
+      - /docker/downloads/usenet/complete:/docker/downloads/usenet/complete
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest@sha256:057eedf25a22905685c55be78b2dd70bcd617a921384cd17cb3f4e8901753331
+    pull_policy: ${pull_policy}
+    container_name: ${flaresolverr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=America/Chicago
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest@sha256:643220338204525524db787ff38a607261597f49d1f550694acdb3e908e2b43e
+    pull_policy: ${pull_policy}
+    container_name: ${prowlarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - flaresolverr
+      - qbittorrent
+      - sabnzbd
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/prowlarr/config:/config
+
+  jellyseerr:
+    image: ghcr.io/fallenbagel/jellyseerr:latest@sha256:9cc9e9ee6cd5cf5a23feb45c37742ba34cfd6314d81d259cddb373a97ac92cdd
+    pull_policy: ${pull_policy}
+    container_name: ${jellyseerr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - radarr
+      - sonarr
+    init: true
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=America/Chicago
+      - PORT=5055
+    volumes:
+      - /docker/jellyseerr/config:/app/config
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest@sha256:c984533510abe0219a70e80d15bd0d212b7df21baa0913759c4ce6cc9092240b
+    pull_policy: ${pull_policy}
+    container_name: ${radarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - prowlarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/radarr/config:/config
+      - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
+      - media_movies:/movies
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest@sha256:fbe67c25693dc5f3de220c5691f374576ae265df782c16918cc071b630490bd7
+    pull_policy: ${pull_policy}
+    container_name: ${sonarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - prowlarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - SONARR__SERVER__PORT=${sonarr_port_ui}
+    volumes:
+      - /docker/sonarr/config:/config
+      - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
+      - media_tvshows:/tv
+
+  sonarr2:
+    image: lscr.io/linuxserver/sonarr:latest@sha256:fbe67c25693dc5f3de220c5691f374576ae265df782c16918cc071b630490bd7
+    pull_policy: ${pull_policy}
+    container_name: ${sonarr2_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - prowlarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - SONARR__SERVER__PORT=${sonarr2_port_ui}
+    volumes:
+      - /docker/sonarr2/config:/config
+      - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
+      - media_anime:/anime
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest@sha256:1d49ebdfaae525d9e1e4ad5b7fa1753e364da44ac1b5e6acae241a2173ac09a4
+    pull_policy: ${pull_policy}
+    container_name: ${lidarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+      - prowlarr
+    network_mode: "service:gluetunmediarr"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/lidarr/config:/config
+      - /docker/downloads:/docker/downloads
+      - qb_downloads:/docker/downloads/torrent
+      - media_music:/music
+
+  notifiarr:
+    image: golift/notifiarr:latest@sha256:750a8f84ce1f8b19d296a0e954700cd55f9d557560ac37713b34c0a29b75f6bf
+    pull_policy: ${pull_policy}
+    container_name: ${notifiarr_container_name}
+    restart: ${restart}
+    depends_on:
+      - gluetunmediarr
+    network_mode: "service:gluetunmediarr"
+    volumes:
+      - /docker/notifiarr/config:/config
+      - /var/run/utmp:/var/run/utmp
+      - /etc/machine-id:/etc/machine-id
