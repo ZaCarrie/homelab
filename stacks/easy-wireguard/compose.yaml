@@ -1,4 +1,6 @@
----
+include:
+  - ../components/caddy_network.yaml
+
 networks:
   wg:
     driver: bridge
@@ -20,7 +22,7 @@ volumes:
 #secrets:
 
 services:
-  wg-easy:
+  wgeasy:
     image: ghcr.io/wg-easy/wg-easy@sha256:5f26407fd2ede54df76d63304ef184576a6c1bb73f934a58a11abdd852fab549
     pull_policy: ${pull_policy}
     container_name: ${wireguard_container_name}
@@ -29,6 +31,7 @@ services:
       wg:
         ipv4_address: 10.42.42.42
         ipv6_address: fdcc:ad94:bacf:61a3::2a
+      caddy:
     ports:
       - "${wireguard_port_51822}:51822/udp"
       - "${wireguard_port_51821}:51821/tcp"
@@ -38,7 +41,7 @@ services:
       - WG_PORT=51822
       - WG_DEFAULT_DNS=10.10.10.1
     volumes:
-      - etc_wireguard:/etc/wireguard
+      - /docker/wgeasy/config:/etc/wireguard
       - /lib/modules:/lib/modules:ro
     cap_add:
       - NET_ADMIN

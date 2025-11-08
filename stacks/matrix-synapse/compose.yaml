@@ -1,5 +1,0 @@
-include:
-  - path: stack.yaml
-    env_file:
-       - ../global-interp.env
-       - ./local-interp.env
