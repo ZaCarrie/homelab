@@ -70,6 +70,28 @@ services:
     devices:
       - /dev/dri:/dev/dri
 
+  emby:
+    image: lscr.io/linuxserver/emby:latest
+    pull_policy: ${pull_policy}
+    container_name: ${emby_container_name}
+    restart: ${restart}
+    networks:
+      caddy:
+        ipv4_address: 30.30.30.20
+    ports:
+      - ${emby_port_8096}:8096
+    environment: 
+      - UID=1000
+      - GID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /docker/${emby_container_name}/config:/config
+      - media_tvshows:/data/tvshows
+      - media_movies:/data/movies
+      - media_anime:/data/anime
+    devices:
+      - /dev/dri:/dev/dri
+
   navidrome:
     image: deluan/navidrome:latest@sha256:648ebd45c50c58edc7ad9f0cc3b4411a1bece16c81f0b3630a0ab0a739c6d7ec
     user: 1000:1000

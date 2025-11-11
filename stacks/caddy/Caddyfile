@@ -30,6 +30,11 @@ jellyfin.{$BASE_DOMAIN} {
     reverse_proxy jellyfin:8096
     import cloudflare
 }
+# emby
+emby.{$BASE_DOMAIN} {
+    reverse_proxy emby:8096
+    import cloudflare
+}
 # qbittorrent
 qb.{$BASE_DOMAIN} {
     reverse_proxy gluetunmediarr:8081
