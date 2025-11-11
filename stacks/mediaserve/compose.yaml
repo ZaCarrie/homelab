@@ -79,7 +79,7 @@ services:
       caddy:
         ipv4_address: 30.30.30.20
     ports:
-      - ${emby_port_8096}:8096
+      - 8097:8096
     environment: 
       - UID=1000
       - GID=1000
