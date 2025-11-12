@@ -1,15 +1,8 @@
-[[server]]
-name = "Nextcloud"
-[server.config]
-address = "https://10.10.10.12:8120"
-enabled = true
-
-##
 
 [[server]]
-name = "Proxmox-Komodo"
+name = "local"
 [server.config]
-address = "https://periphery:8120"
+address = "https://host.docker.internal:8120"
 enabled = true
 
 ##
@@ -17,7 +10,7 @@ enabled = true
 [[stack]]
 name = "caddy"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -37,7 +30,7 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 [[stack]]
 name = "frigate"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -49,7 +42,7 @@ additional_env_files = ["../global-interp.env"]
 [[stack]]
 name = "mediarr"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -72,7 +65,7 @@ MEDIARR_WG_SERVER_HOSTNAME=[[MEDIARR_WG_SERVER_HOSTNAME]]
 [[stack]]
 name = "mediaserve"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -87,24 +80,9 @@ NFS_O=[[NFS_O]]
 ##
 
 [[stack]]
-name = "nextcloud"
-[stack.config]
-server = "Nextcloud"
-auto_update = true
-auto_update_all_services = true
-linked_repo = "Homelab"
-run_directory = "stacks/nextcloud"
-environment = """
-NFS_DEVICE=[[NFS_DEVICE]]
-NFS_O=[[NFS_O]]
-"""
-
-##
-
-[[stack]]
 name = "openwebui"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -116,7 +94,7 @@ additional_env_files = ["../global-interp.env"]
 [[stack]]
 name = "wgeasy"
 [stack.config]
-server = "Proxmox-Komodo"
+server = "local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -133,7 +111,7 @@ WG_HOST=[[WG_HOST]]
 [[repo]]
 name = "Homelab"
 [repo.config]
-server = "Proxmox-Komodo"
+server = "local"
 builder = "local"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
@@ -177,7 +155,7 @@ executions = [
 name = "Stage 5"
 enabled = true
 executions = [
-  { execution.type = "PruneSystem", execution.params.server = "Proxmox-Komodo", enabled = true }
+  { execution.type = "PruneSystem", execution.params.server = "local", enabled = true }
 ]
 
 ##
@@ -186,7 +164,7 @@ executions = [
 name = "local"
 [builder.config]
 type = "Server"
-params.server_id = "Proxmox-Komodo"
+params.server_id = "local"
 
 ##
 
