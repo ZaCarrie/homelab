@@ -13,7 +13,7 @@ name = "caddy"
 server = "Local"
 auto_update = true
 auto_update_all_services = true
-linked_repo = "Homelab"
+linked_repo = "homelab"
 run_directory = "stacks/caddy"
 additional_env_files = ["../global-interp.env"]
 environment = """
@@ -33,7 +33,7 @@ name = "frigate"
 server = "Local"
 auto_update = true
 auto_update_all_services = true
-linked_repo = "Homelab"
+linked_repo = "homelab"
 run_directory = "stacks/frigate"
 additional_env_files = ["../global-interp.env"]
 
@@ -45,7 +45,7 @@ name = "mediarr"
 server = "Local"
 auto_update = true
 auto_update_all_services = true
-linked_repo = "Homelab"
+linked_repo = "homelab"
 run_directory = "stacks/mediarr"
 additional_env_files = ["../global-interp.env"]
 environment = """
@@ -68,7 +68,7 @@ name = "mediaserve"
 server = "Local"
 auto_update = true
 auto_update_all_services = true
-linked_repo = "Homelab"
+linked_repo = "homelab"
 run_directory = "stacks/mediaserve"
 additional_env_files = ["../global-interp.env"]
 environment = """
@@ -85,7 +85,7 @@ name = "openwebui"
 server = "Local"
 auto_update = true
 auto_update_all_services = true
-linked_repo = "Homelab"
+linked_repo = "homelab"
 run_directory = "stacks/openwebui"
 additional_env_files = ["../global-interp.env"]
 
@@ -97,7 +97,7 @@ name = "wgeasy"
 server = "Local"
 auto_update = true
 auto_update_all_services = true
-linked_repo = "Homelab"
+linked_repo = "homelab"
 run_directory = "stacks/easy-wireguard"
 additional_env_files = ["../global-interp.env"]
 environment = """
@@ -127,7 +127,7 @@ config.schedule_format = "Cron"
 name = "Stage 1"
 enabled = true
 executions = [
-  { execution.type = "PullRepo", execution.params.repo = "Homelab", enabled = true }
+  { execution.type = "PullRepo", execution.params.repo = "homelab", enabled = true }
 ]
 
 [[procedure.config.stage]]
