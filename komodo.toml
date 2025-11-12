@@ -10,7 +10,7 @@ enabled = true
 [[stack]]
 name = "caddy"
 [stack.config]
-server = "local"
+server = "Local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -30,7 +30,7 @@ CADDY_NEXTCLOUD_DOMAIN=[[CADDY_NEXTCLOUD_DOMAIN]]
 [[stack]]
 name = "frigate"
 [stack.config]
-server = "local"
+server = "Local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -42,7 +42,7 @@ additional_env_files = ["../global-interp.env"]
 [[stack]]
 name = "mediarr"
 [stack.config]
-server = "local"
+server = "Local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -65,7 +65,7 @@ MEDIARR_WG_SERVER_HOSTNAME=[[MEDIARR_WG_SERVER_HOSTNAME]]
 [[stack]]
 name = "mediaserve"
 [stack.config]
-server = "local"
+server = "Local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -82,7 +82,7 @@ NFS_O=[[NFS_O]]
 [[stack]]
 name = "openwebui"
 [stack.config]
-server = "local"
+server = "Local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -94,7 +94,7 @@ additional_env_files = ["../global-interp.env"]
 [[stack]]
 name = "wgeasy"
 [stack.config]
-server = "local"
+server = "Local"
 auto_update = true
 auto_update_all_services = true
 linked_repo = "Homelab"
@@ -155,7 +155,7 @@ executions = [
 name = "Stage 5"
 enabled = true
 executions = [
-  { execution.type = "PruneSystem", execution.params.server = "local", enabled = true }
+  { execution.type = "PruneSystem", execution.params.server = "Local", enabled = true }
 ]
 
 ##
