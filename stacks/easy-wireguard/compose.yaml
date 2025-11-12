@@ -34,7 +34,7 @@ services:
       - WG_PORT=51822
       - WG_DEFAULT_DNS=10.10.10.1
     volumes:
-      - /docker/wgeasy/config:/etc/wireguard
+      - /${docker_dir}/${wireguard_container_name}/config:/etc/wireguard
       - /lib/modules:/lib/modules:ro
     cap_add:
       - NET_ADMIN

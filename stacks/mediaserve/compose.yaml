@@ -46,7 +46,7 @@ services:
     environment:
       - SECRET_ENCRYPTION_KEY=8aaca723973dd7ea0495d56dc5000eeda8d194f51de7611571dbfab032e39c82
     volumes:
-      - /docker/${homarr_container_name}/appdata:/appdata
+      - /${docker_dir}/${homarr_container_name}/appdata:/appdata
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest@sha256:d351d241011e26be29ac06127644c194b5e0d204edb852727afa4df0ee791fb5
@@ -63,7 +63,7 @@ services:
       - GID=1000
       - TZ=America/Chicago
     volumes:
-      - /docker/jellyfin/config:/config
+      - /${docker_dir}/${jellyfin_container_name}/config:/config
       - media_tvshows:/data/tvshows
       - media_movies:/data/movies
       - media_anime:/data/anime
@@ -85,7 +85,7 @@ services:
       - GID=1000
       - TZ=America/Chicago
     volumes:
-      - /docker/${emby_container_name}/config:/config
+      - /${docker_dir}/${emby_container_name}/config:/config
       - media_tvshows:/data/tvshows
       - media_movies:/data/movies
       - media_anime:/data/anime
@@ -106,5 +106,5 @@ services:
     environment:
       - ND_SCANNER_PURGEMISSING=full
     volumes:
-      - /docker/${navidrome_container_name}/data:/data
+      - /${docker_dir}/${navidrome_container_name}/data:/data
       - media_music:/music:ro

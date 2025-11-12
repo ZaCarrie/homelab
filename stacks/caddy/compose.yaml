@@ -29,6 +29,6 @@ services:
       - DOCKER_LXC_IP=${docker_lxc_ip}     
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
-      - /docker/caddy/data:/data
-      - /docker/caddy/config:/config
+      - /${docker_dir}/${caddy_container_name}/data:/data
+      - /${docker_dir}/${caddy_container_name}/config:/config
 

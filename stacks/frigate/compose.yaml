@@ -26,8 +26,8 @@ services:
       - LIBVA_DRIVER_NAME=radeonsi
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /docker/frigate/config:/config
-      - /docker/frigate/recording:/media/frigate
+      - /${docker_dir}/${frigate_container_name}/config:/config
+      - /${docker_dir}/${frigate_container_name}/recording:/media/frigate
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
         tmpfs:
