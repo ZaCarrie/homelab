@@ -1,0 +1,67 @@
+variant: fcos
+version: 1.6.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJUPfUkQN5M5WulWL+YicxPYuGIM9MoWxq8pEWum7ib
+      password_hash: $y$j9T$6n0wtMenLORLQ710gbPtj0$bIgvYezrTfF7hDqbPL1kt7ajPNQajX3wFb6Fw.NpJn0
+      groups:
+        - wheel
+        - sudo
+        - docker
+
+storage:
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: coreos-komodo
+    - path: /etc/zincati/config.d/90-disable-auto-updates.toml
+      mode: 0644
+      contents:
+        inline: |
+          [updates]
+          enabled = false
+    - path: /etc/systemd/system/rpm-ostree-countme.timer.d/40-weekly.conf
+      mode: 0644
+      contents:
+        inline: |
+          [Timer]
+          OnCalendar=weekly
+
+systemd:
+  units:
+    - name: rpm-ostree-rebase-to-ucore.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Rebase to uCore
+        Wants=network-online.target
+        After=network-online.target
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/rpm-ostree-rebase-to-ucore.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/rpm-ostree rebase --reboot ostree-unverified-registry:ghcr.io/ublue-os/ucore:stable
+        ExecStart=/usr/bin/touch /var/lib/rpm-ostree-rebase-to-ucore.stamp
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: docker.socket
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Docker Socket for the API
+        PartOf=docker.service
+
+        [Socket]
+        ListenStream=/var/run/docker.sock
+        SocketMode=0660
+        SocketUser=root
+        SocketGroup=docker
+
+        [Install]
+        WantedBy=sockets.target

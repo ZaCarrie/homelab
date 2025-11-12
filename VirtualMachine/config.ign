@@ -1,0 +1,63 @@
+{
+  "ignition": {
+    "version": "3.5.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "sudo",
+          "docker"
+        ],
+        "name": "core",
+        "passwordHash": "$y$j9T$6n0wtMenLORLQ710gbPtj0$bIgvYezrTfF7hDqbPL1kt7ajPNQajX3wFb6Fw.NpJn0",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGJUPfUkQN5M5WulWL+YicxPYuGIM9MoWxq8pEWum7ib"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,coreos-komodo"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/zincati/config.d/90-disable-auto-updates.toml",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bupdates%5D%0Aenabled%20%3D%20false%0A"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/systemd/system/rpm-ostree-countme.timer.d/40-weekly.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5BTimer%5D%0AOnCalendar%3Dweekly%0A"
+        },
+        "mode": 420
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Rebase to uCore\nWants=network-online.target\nAfter=network-online.target\nBefore=zincati.service\nConditionPathExists=!/var/lib/rpm-ostree-rebase-to-ucore.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree rebase --reboot ostree-unverified-registry:ghcr.io/ublue-os/ucore:stable\nExecStart=/usr/bin/touch /var/lib/rpm-ostree-rebase-to-ucore.stamp\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "rpm-ostree-rebase-to-ucore.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Docker Socket for the API\nPartOf=docker.service\n\n[Socket]\nListenStream=/var/run/docker.sock\nSocketMode=0660\nSocketUser=root\nSocketGroup=docker\n\n[Install]\nWantedBy=sockets.target\n",
+        "enabled": true,
+        "name": "docker.socket"
+      }
+    ]
+  }
+}
