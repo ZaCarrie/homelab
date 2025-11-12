@@ -1,6 +1,6 @@
 
 [[server]]
-name = "local"
+name = "Local"
 [server.config]
 address = "https://host.docker.internal:8120"
 enabled = true
@@ -109,10 +109,10 @@ WG_HOST=[[WG_HOST]]
 ##
 
 [[repo]]
-name = "Homelab"
+name = "homelab"
 [repo.config]
-server = "local"
-builder = "local"
+server = "Local"
+builder = "Local"
 git_account = "github.wish887@slmail.me"
 repo = "ZaCarrie/homelab"
 
@@ -191,10 +191,10 @@ executions = [
 ##
 
 [[builder]]
-name = "local"
+name = "Local"
 [builder.config]
 type = "Server"
-params.server_id = "local"
+params.server_id = "Local"
 
 ##
 
