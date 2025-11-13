@@ -102,5 +102,5 @@ services:
     environment:
       - ND_SCANNER_PURGEMISSING=full
     volumes:
-      - /${docker_dir}/${navidrome_container_name}/data:/data:z
+      - /${docker_dir}/${navidrome_container_name}/data:/data:Z
       - media_music:/music:ro
