@@ -28,6 +28,7 @@ systemctl enable periphery.service
 ```
 curl -O https://raw.githubusercontent.com/moghtech/komodo/main/compose/mongo.compose.yaml
 ```
+```
 curl -O https://raw.githubusercontent.com/moghtech/komodo/main/compose/compose.env
 ```
 ## edit files for settings you want but make sure to in the compose.yaml remove the periphery service section and uncomment this section under the core service
