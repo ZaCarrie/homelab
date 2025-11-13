@@ -82,7 +82,7 @@ services:
       - DNS_KEEP_NAMESERVER=off
       - DNS_ADDRESS=127.0.0.1
     volumes:
-      - /${docker_dir}/${gluetunmediarr_container_name}/config:/gluetun:z
+      - /${docker_dir}/${gluetunmediarr_container_name}/config:/gluetun:Z
     cap_add:
       - NET_ADMIN
     devices:
@@ -102,7 +102,7 @@ services:
       - TZ=America/Chicago
       - WEBUI_PORT=${qbittorrent_port_ui}
     volumes:
-      - /${docker_dir}/${qbittorrent_container_name}/config:/config:z
+      - /${docker_dir}/${qbittorrent_container_name}/config:/config:Z
       - qb_downloads:/docker/downloads/torrent
 
   sabnzbd:
@@ -118,7 +118,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /${docker_dir}/${sabnzbd_container_name}/config:/config:z
+      - /${docker_dir}/${sabnzbd_container_name}/config:/config:Z
       - /${docker_dir}/downloads/usenet/inprogress:/docker/downloads/usenet/inprogress:z
       - /${docker_dir}/downloads/usenet/complete:/docker/downloads/usenet/complete:z
 
@@ -152,7 +152,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /${docker_dir}/${prowlarr_container_name}/config:/config:z
+      - /${docker_dir}/${prowlarr_container_name}/config:/config:Z
 
   jellyseerr:
     image: ghcr.io/fallenbagel/jellyseerr:latest@sha256:9cc9e9ee6cd5cf5a23feb45c37742ba34cfd6314d81d259cddb373a97ac92cdd
@@ -170,7 +170,7 @@ services:
       - TZ=America/Chicago
       - PORT=5055
     volumes:
-      - /${docker_dir}/${jellyseerr_container_name}/config:/app/config:z
+      - /${docker_dir}/${jellyseerr_container_name}/config:/app/config:Z
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
       start_period: 20s
@@ -192,7 +192,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /${docker_dir}/${radarr_container_name}/config:/config:z
+      - /${docker_dir}/${radarr_container_name}/config:/config:Z
       - /${docker_dir}/downloads:/docker/downloads:z
       - qb_downloads:/docker/downloads/torrent
       - media_movies:/movies
@@ -212,7 +212,7 @@ services:
       - TZ=America/Chicago
       - SONARR__SERVER__PORT=${sonarr_port_ui}
     volumes:
-      - /${docker_dir}/${sonarr_container_name}/config:/config:z
+      - /${docker_dir}/${sonarr_container_name}/config:/config:Z
       - /${docker_dir}/downloads:/docker/downloads:z
       - qb_downloads:/docker/downloads/torrent
       - media_tvshows:/tv
@@ -232,7 +232,7 @@ services:
       - TZ=America/Chicago
       - SONARR__SERVER__PORT=${sonarr2_port_ui}
     volumes:
-      - /${docker_dir}/${sonarr2_container_name}/config:/config:z
+      - /${docker_dir}/${sonarr2_container_name}/config:/config:Z
       - /${docker_dir}/downloads:/docker/downloads:z
       - qb_downloads:/docker/downloads/torrent
       - media_anime:/anime
@@ -251,7 +251,7 @@ services:
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /${docker_dir}/${lidarr_container_name}/config:/config:z
+      - /${docker_dir}/${lidarr_container_name}/config:/config:Z
       - /${docker_dir}/downloads:/docker/downloads:z
       - qb_downloads:/docker/downloads/torrent
       - media_music:/music
@@ -265,6 +265,6 @@ services:
       - gluetunmediarr
     network_mode: "service:gluetunmediarr"
     volumes:
-      - /${docker_dir}/${notifiarr_container_name}/config:/config:z
-      - /var/run/utmp:/var/run/utmp:z
-      - /etc/machine-id:/etc/machine-id:z
+      - /${docker_dir}/${notifiarr_container_name}/config:/config:Z
+      - /var/run/utmp:/var/run/utmp:ro
+      - /etc/machine-id:/etc/machine-id:ro
