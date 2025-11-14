@@ -10,7 +10,7 @@ podman run --interactive --rm quay.io/coreos/butane:release \
 ### then run command to install to vm disk with setup from ignition file in repo
 ```
 sudo coreos-installer install /dev/sda \
-    --ignition-url https://raw.githubusercontent.com/ZaCarrie/homelab/refs/heads/main/coreos/config.ign
+    --ignition-url https://raw.githubusercontent.com/zacarrie/homelab/refs/heads/main/coreos/config.ign
 ```
 ### swap over to root user and setup mango version of komodo following [https://komo.do/docs/setup/mongo](https://komo.do/docs/setup/mongo) and using the systemd version of the periphery agent from this komodo script [here](https://github.com/moghtech/komodo/tree/main/scripts)
 ```
