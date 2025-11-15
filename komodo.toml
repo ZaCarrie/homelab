@@ -113,7 +113,7 @@ name = "homelab"
 server = "Local"
 builder = "Local"
 git_account = "github.wish887@slmail.me"
-repo = "ZaCarrie/homelab"
+repo = "zacarrie/homelab"
 
 ##
 
