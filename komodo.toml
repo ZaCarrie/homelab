@@ -68,7 +68,6 @@ linked_repo = "homelab"
 run_directory = "stacks/mediaserve"
 additional_env_files = ["../global-interp.env"]
 environment = """
-NFS_DEVICE=[[NFS_DEVICE]]
 NFS_DEVICE_MEDIA=[[NFS_DEVICE_MEDIA]]
 NFS_O=[[NFS_O]]
 """
