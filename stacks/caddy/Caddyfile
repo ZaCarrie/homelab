@@ -11,72 +11,72 @@
 #------------------------------------------------
 # caddy network
 #------------------------------------------------
-openwebui.{$BASE_DOMAIN} {
+openwebui.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy openwebui:8080
     import cloudflare
 }
 # homarr
-homarr.{$BASE_DOMAIN} {
+homarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy homarr:7575
     import cloudflare
 }
 # navidrome
-navidrome.{$BASE_DOMAIN} {
+navidrome.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy navidrome:4533
     import cloudflare
 }
 # jellyfin
-jellyfin.{$BASE_DOMAIN} {
+jellyfin.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy jellyfin:8096
     import cloudflare
 }
 # emby
-emby.{$BASE_DOMAIN} {
+emby.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy emby:8096
     import cloudflare
 }
 # qbittorrent
-qb.{$BASE_DOMAIN} {
+qb.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:8081
     import cloudflare
 }
 # sabnzbd
-sabnzbd.{$BASE_DOMAIN} {
+sabnzbd.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:8080
     import cloudflare
 }
 # prowlarr
-prowlarr.{$BASE_DOMAIN} {
+prowlarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:9696
     import cloudflare
 }
 # radarr
-radarr.{$BASE_DOMAIN} {
+radarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:7878
     import cloudflare
 }
 # sonarr
-sonarr.{$BASE_DOMAIN} {
+sonarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:8989
     import cloudflare
 }
 # sonarr2
-sonarr2.{$BASE_DOMAIN} {
+sonarr2.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:8990
     import cloudflare
 }
 # notifiarr
-notifiarr.{$BASE_DOMAIN} {
+notifiarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:5454
     import cloudflare
 }
 # jellyseerr
-jellyseerr.{$BASE_DOMAIN} {
+jellyseerr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:5055
     import cloudflare
 }
 # lidarr
-lidarr.{$BASE_DOMAIN} {
+lidarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:8686
     import cloudflare
 }
@@ -85,18 +85,18 @@ lidarr.{$BASE_DOMAIN} {
 # main komodo server
 #------------------------------------------------
 # komodo gui
-komodo.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:9120
+komodo.{$CADDY_PRIVATE_DOMAIN} {
+    reverse_proxy localhost:9120
     import cloudflare
 }
 # wg dashboard
-wg.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:51821
+wg.{$CADDY_PRIVATE_DOMAIN} {
+    reverse_proxy localhost:51821
     import cloudflare
 }
 # frigate
-frigate.{$BASE_DOMAIN} {
-    reverse_proxy {$DOCKER_LXC_IP}:5000
+frigate.{$CADDY_PRIVATE_DOMAIN} {
+    reverse_proxy localhost:5000
     import cloudflare
 }
 
@@ -104,7 +104,7 @@ frigate.{$BASE_DOMAIN} {
 # external to docker lxc
 #------------------------------------------------
 # proxmox
-pve.{$BASE_DOMAIN} {
+pve.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy 10.10.10.200:8006 {
         transport http {
             tls_insecure_skip_verify
@@ -113,7 +113,7 @@ pve.{$BASE_DOMAIN} {
     import cloudflare
 }
 # truenas
-truenas.{$BASE_DOMAIN} {
+truenas.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy 10.10.10.10:443 {
         transport http {
             tls_insecure_skip_verify
@@ -122,12 +122,8 @@ truenas.{$BASE_DOMAIN} {
     import cloudflare
 }
 # homeassistant
-ha.{$BASE_DOMAIN} {
+ha.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy 10.10.10.234:8123
-    import cloudflare
-}
-ollama.{$BASE_DOMAIN} {
-    reverse_proxy 192.168.1.150:11434
     import cloudflare
 }
 
@@ -135,12 +131,7 @@ ollama.{$BASE_DOMAIN} {
 # nextcloud server
 #------------------------------------------------
 # nextcloud
-https://{$CADDY_NEXTCLOUD_DOMAIN}:443 {
+https://nextcloud.{$CADDY_PUBLIC_DOMAIN}:443 {
     reverse_proxy 10.10.10.12:11000
-    import cloudflare
-}
-# jellyfin pub
-jellyfin.{$CADDY_NEXTCLOUD_DOMAIN} {
-    reverse_proxy jellyfin:8096
     import cloudflare
 }

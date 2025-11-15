@@ -4,7 +4,11 @@ include:
 
 #networks:
 
-#volumes:
+volumes:
+  caddy-data:
+    external: true
+  caddy-config:
+    external: true
 
 #secrets:
 
@@ -22,13 +26,11 @@ services:
       - "${caddy_port_443}:443/udp"
     environment:    
       - TZ=${timezone}
-      - BASE_DOMAIN=${CADDY_BASE_DOMAIN}
-      - BASE_DOMAIN2=${CADDY_BASE_DOMAIN2}
-      - CLOUDFLARE_API_TOKEN=${CADDY_CLOUDFLARE_API}
-      - CADDY_NEXTCLOUD_DOMAIN=${CADDY_NEXTCLOUD_DOMAIN}
-      - DOCKER_LXC_IP=${docker_lxc_ip}     
+      - CADDY_PRIVATE_DOMAIN=${CADDY_PRIVATE_DOMAIN}
+      - CADDY_PUBLIC_DOMAIN=${CADDY_PUBLIC_DOMAIN}
+      - CLOUDFLARE_API_TOKEN=${CADDY_CLOUDFLARE_API}    
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile:ro
-      - /${docker_dir}/${caddy_container_name}/data:/data:Z
-      - /${docker_dir}/${caddy_container_name}/config:/config:Z
+      - caddy-data:/data
+      - caddy-config:/config
 
