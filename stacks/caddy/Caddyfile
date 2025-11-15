@@ -80,11 +80,7 @@ lidarr.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy gluetunmediarr:8686
     import cloudflare
 }
-# wg dashboard
-wg.{$CADDY_PRIVATE_DOMAIN} {
-    reverse_proxy wgeasy:51821
-    import cloudflare
-}
+
 
 #------------------------------------------------
 # main komodo server
@@ -99,7 +95,11 @@ frigate.{$CADDY_PRIVATE_DOMAIN} {
     reverse_proxy localhost:5000
     import cloudflare
 }
-
+# wg dashboard
+wg.{$CADDY_PRIVATE_DOMAIN} {
+    reverse_proxy 10.10.10.87:10086
+    import cloudflare
+}
 #------------------------------------------------
 # external to docker lxc
 #------------------------------------------------
