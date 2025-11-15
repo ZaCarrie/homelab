@@ -16,7 +16,7 @@ volumes:
 
 services:
   wgeasy:
-    image: ghcr.io/wg-easy/wg-easy@sha256:5f26407fd2ede54df76d63304ef184576a6c1bb73f934a58a11abdd852fab549
+    image: ghcr.io/wg-easy/wg-easy:latest@sha256:5f26407fd2ede54df76d63304ef184576a6c1bb73f934a58a11abdd852fab549
     pull_policy: ${pull_policy}
     container_name: ${wireguard_container_name}
     restart: ${restart}
@@ -37,6 +37,7 @@ services:
       - /lib/modules:/lib/modules:ro
     cap_add:
       - NET_ADMIN
+      - SYS_MODULE
       # - NET_RAW # ⚠️ Uncomment if using Podman
     sysctls:
       - net.ipv4.ip_forward=1
