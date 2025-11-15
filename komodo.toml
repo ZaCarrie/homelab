@@ -96,9 +96,7 @@ linked_repo = "homelab"
 run_directory = "stacks/easy-wireguard"
 additional_env_files = ["../global-interp.env"]
 environment = """
-NFS_DEVICE=[[NFS_DEVICE]]
-NFS_O=[[NFS_O]]
-WG_HOST=[[WG_HOST]]
+CADDY_PUBLIC_DOMAIN=[[CADDY_PUBLIC_DOMAIN]]
 """
 
 ##
